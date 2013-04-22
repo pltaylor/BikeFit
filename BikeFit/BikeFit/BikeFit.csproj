@@ -168,12 +168,14 @@
     <Compile Include="App_Start\HotTowelConfig.cs" />
     <Compile Include="App_Start\HotTowelRouteConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\BreezeController.cs" />
     <Compile Include="Controllers\HotTowelController.cs" />
+    <Compile Include="DataLayer\BikeFitContext.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\BikeModel.cs" />
-    <Compile Include="Models\BikeSizes.cs" />
+    <Compile Include="Models\BikeSize.cs" />
     <Compile Include="Models\Manufacturer.cs" />
     <Compile Include="Models\WheelSize.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -209,6 +211,10 @@
     <Content Include="App\views\home.html" />
     <Content Include="App\views\nav.html" />
     <Content Include="App\views\shell.html" />
+    <Content Include="App_Data\BikeFit.DataLayer.BikeFitContext.mdf" />
+    <Content Include="App_Data\BikeFit.DataLayer.BikeFitContext_log.ldf">
+      <DependentUpon>BikeFit.DataLayer.BikeFitContext.mdf</DependentUpon>
+    </Content>
     <Content Include="Content\app.css" />
     <Content Include="Content\bootstrap-responsive.css" />
     <Content Include="Content\bootstrap-responsive.min.css" />
@@ -255,9 +261,7 @@
     <Content Include="Views\HotTowel\_splash.cshtml" />
     <Content Include="Scripts\jquery-2.0.0.min.map" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="App_Data\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="packages.config" />
   </ItemGroup>

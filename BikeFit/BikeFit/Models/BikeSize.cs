@@ -1,9 +1,11 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace BikeFit.Models
 {
-    public class BikeSizes
+    public class BikeSize
     {
+        [Key]
         public Guid SizeID { get; set; }
 
         public double Size { get; set; }

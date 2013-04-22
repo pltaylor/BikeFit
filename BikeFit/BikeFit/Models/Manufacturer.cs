@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
+using System.ComponentModel.DataAnnotations;
 namespace BikeFit.Models
 {
     public class Manufacturer
@@ -14,6 +12,7 @@ namespace BikeFit.Models
             models = new List<BikeModel>();
         }
 
+        [Key]
         public Guid ManufacturerID { get; set; }
 
         public string Name { get; set; }

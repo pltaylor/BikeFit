@@ -1,17 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace BikeFit.Models
 {
     public class BikeModel
     {
-        private ICollection<BikeSizes> sizes;
+        private ICollection<BikeSize> sizes;
 
         public BikeModel()
         {
-            sizes = new List<BikeSizes>();
+            sizes = new List<BikeSize>();
         }
-
+        [Key]
         public Guid BikeModelID { get; set; }
 
         public string Name { get; set; }
@@ -20,7 +21,7 @@ namespace BikeFit.Models
 
         public DateTime ManufacturedEndDate { get; set; }
 
-        public virtual ICollection<BikeSizes> Sizes
+        public virtual ICollection<BikeSize> Sizes
         {
             get
             {
