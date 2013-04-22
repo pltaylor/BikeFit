@@ -9,6 +9,7 @@ namespace BikeFit.Models
 
         public Manufacturer()
         {
+            ManufacturerID = new Guid();
             models = new List<BikeModel>();
         }
 

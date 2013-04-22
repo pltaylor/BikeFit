@@ -1,3 +1,5 @@
+using BikeFit.Models;
+
 namespace BikeFit.Migrations
 {
     using System;
@@ -19,13 +21,15 @@ namespace BikeFit.Migrations
             //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
             //  to avoid creating duplicate seed data. E.g.
             //
-            //    context.People.AddOrUpdate(
-            //      p => p.FullName,
-            //      new Person { FullName = "Andrew Peters" },
-            //      new Person { FullName = "Brice Lambson" },
-            //      new Person { FullName = "Rowan Miller" }
-            //    );
-            //
+            context.Manufacturers.AddOrUpdate(
+                p => p.Name,
+                new Manufacturer { Name = "Cervelo" },
+                new Manufacturer { Name = "Cannondale" },
+                new Manufacturer { Name = "Felt" },
+                new Manufacturer { Name = "Kestral" },
+                new Manufacturer { Name = "Specialized" },
+                new Manufacturer { Name = "Trek" },
+                new Manufacturer { Name = "Quintana Roo" });
         }
     }
 }
