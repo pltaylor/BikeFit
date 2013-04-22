@@ -1,12 +1,23 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BikeFit.Models
 {
     public class BikeSize
     {
+        public BikeSize()
+        {
+            SizeID = Guid.NewGuid();
+        }
+
         [Key]
         public Guid SizeID { get; set; }
+
+        [ForeignKey("BikeModel")]
+        public Guid BikeModelID { get; set; }
+
+        public BikeModel BikeModel { get; set; }
 
         public double Size { get; set; }
 
@@ -14,7 +25,7 @@ namespace BikeFit.Models
 
         public double HeadTubeAngle { get; set; }
 
-        public double BBDrop { get; set; }
+        public double BottomBracketDrop { get; set; }
 
         public double HeadTubeLength { get; set; }
 

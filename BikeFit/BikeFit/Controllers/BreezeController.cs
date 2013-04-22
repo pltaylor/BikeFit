@@ -25,5 +25,17 @@ namespace BikeFit.Controllers
             return contextProvider.Context.Manufacturers;
         }
 
+        [HttpGet]
+        public IQueryable<BikeModel> BikeModels()
+        {
+            return contextProvider.Context.BikeModels;
+        }
+
+        [HttpGet]
+        public IQueryable<BikeSize> BikeSizes()
+        {
+            return contextProvider.Context.BikeSizes;
+        }
+
     }
 }
