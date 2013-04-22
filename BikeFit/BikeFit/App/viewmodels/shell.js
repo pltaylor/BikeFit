@@ -17,7 +17,7 @@
         function boot() {
             router.mapNav('home');
             router.mapNav('frames');
-            log('Hot Towel SPA Loaded!', null, true);
+            log('My Bike Fit Loaded!', null, true);
             return router.activate('home');
         }
 
