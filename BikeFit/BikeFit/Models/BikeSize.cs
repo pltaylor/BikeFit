@@ -25,5 +25,9 @@ namespace BikeFit.Models
         public double Stack { get; set; }
 
         public double Reach { get; set; }
+
+        public double MaxSeatAngle { get; set; }
+
+        public double MinSeatAngle { get; set; }
     }
 }
