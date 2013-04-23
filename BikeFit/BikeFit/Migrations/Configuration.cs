@@ -37,14 +37,47 @@ namespace BikeFit.Migrations
 
             context.SaveChanges();
 
-            context.BikeModels.AddOrUpdate(
-                p => p.BikeModelID,
-                new BikeModel { BikeModelID = new Guid("96405CFB-F4BE-4F87-9A14-8DA229FBABDB"), Name = "P2C", ManufacturedStartDate = new DateTime(1995, 1, 1), Manufacturer = context.Manufacturers.First(p => p.Name == "Cervelo") },
-                new BikeModel { BikeModelID = new Guid("32F1B963-7608-4B5F-8F7C-FC4EC2399F4A"), Name = "P3C", ManufacturedStartDate = new DateTime(1995, 1, 1), Manufacturer = context.Manufacturers.First(p => p.Name == "Cervelo") },
-                new BikeModel { BikeModelID = new Guid("90D28C45-0355-4B98-ADE8-51B809D74645"), Name = "Slice", ManufacturedStartDate = new DateTime(1995, 1, 1), Manufacturer = context.Manufacturers.First(p => p.Name == "Cannondale") },
-                new BikeModel { BikeModelID = new Guid("5F079D5D-70BA-46DF-A3A1-BB38C500496E"), Name = "DA", ManufacturedStartDate = new DateTime(1995, 1, 1), Manufacturer = context.Manufacturers.First(p => p.Name == "Felt") }
-                );
+            //context.BikeModels.AddOrUpdate(
+            //    p => p.BikeModelID,
+            //    new BikeModel { BikeModelID = new Guid("96405CFB-F4BE-4F87-9A14-8DA229FBABDB"), Name = "P2C", ManufacturedStartDate = new DateTime(1995, 1, 1), Manufacturer = context.Manufacturers.First(p => p.Name == "Cervelo") },
+            //    new BikeModel { BikeModelID = new Guid("32F1B963-7608-4B5F-8F7C-FC4EC2399F4A"), Name = "P3C", ManufacturedStartDate = new DateTime(1995, 1, 1), Manufacturer = context.Manufacturers.First(p => p.Name == "Cervelo") },
+            //    new BikeModel { BikeModelID = new Guid("90D28C45-0355-4B98-ADE8-51B809D74645"), Name = "Slice", ManufacturedStartDate = new DateTime(1995, 1, 1), Manufacturer = context.Manufacturers.First(p => p.Name == "Cannondale") },
+            //    new BikeModel { BikeModelID = new Guid("5F079D5D-70BA-46DF-A3A1-BB38C500496E"), Name = "DA", ManufacturedStartDate = new DateTime(1995, 1, 1), Manufacturer = context.Manufacturers.First(p => p.Name == "Felt") }
+            //    );
 
+            //context.SaveChanges();
+
+            context.BikeSizes.AddOrUpdate(
+                p => p.Size,
+                new BikeSize { 
+                    BikeModel = context.BikeModels.First(p => p.Name == "P2C"), 
+                    SizeID = new Guid("DED67998-037C-436C-9E3D-A5EC695424F7"), 
+                    Size = 51, 
+                    WheelSize = WheelSize.SevenHundred, 
+                    HeadTubeAngle = 72.5, 
+                    BottomBracketDrop = 60,
+                    HeadTubeLength = 90,
+                    FrontCenter = 586,
+                    RearCenter = 380,
+                    Stack = 482,
+                    Reach = 405
+                },
+                new BikeSize
+                {
+                    BikeModel = context.BikeModels.First(p => p.Name == "P2C"),
+                    SizeID = new Guid("D912436A-F0D7-4402-AE57-4BD01BF83DD2"),
+                    Size = 54,
+                    WheelSize = WheelSize.SevenHundred,
+                    HeadTubeAngle = 72.5,
+                    BottomBracketDrop = 60,
+                    HeadTubeLength = 121,
+                    FrontCenter = 609,
+                    RearCenter = 380,
+                    Stack = 512,
+                    Reach = 418
+                }
+                );
+            
             context.SaveChanges();
         }
     }
