@@ -1,15 +1,15 @@
 ﻿<section>
     <h2 class="page-title" data-bind="text: title"></h2>
     <div class="row-fluid">
-        <div class="span4">
+        <div class="span4" data-bind="with: frame1">
             <h4 class="text-center">Frame 1</h4>
             <!--ko compose: {view: 'frameSelection'} --><!--/ko--> 
         </div>
-        <div class="span4">
+        <div class="span4" data-bind="with: frame2">
             <h4 class="text-center">Frame 2</h4>
             <!--ko compose: {view: 'frameSelection'} --><!--/ko-->
         </div>
-        <div class="span4">
+        <div class="span4" data-bind="with: frame3">
             <h4 class="text-center">Frame 3</h4>
             <!--ko compose: {view: 'frameSelection'} --><!--/ko-->
         </div>
