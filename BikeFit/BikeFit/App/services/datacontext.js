@@ -1,36 +1,36 @@
 ﻿define(['durandal/system', 'services/model', 'config', 'services/logger'],
     function (system, model, config, logger) {
-        var EntityQuery = breeze.EntityQuery,
+        var entityQuery = breeze.EntityQuery,
             manager = configureBreezeManager();
         
-        var getSpeakers = function (speakerObservable) {
-            var query = EntityQuery.from('Speakers')
-                .orderBy('firstName, lastName');
+        var getManufacturers = function (manufacturerObservable) {
+            var query = entityQuery.from('Manufacturers')
+                .orderBy('name');
 
             return manager.executeQuery(query)
                 .then(querySucceeded)
                 .fail(queryFailed);
 
             function querySucceeded(data) {
-                if (speakerObservable) {
-                    speakerObservable(data.results);
+                if (manufacturerObservable) {
+                    manufacturerObservable(data.results);
                 }
-                log('Retrieved [Speaker] from remote data source',
+                log('Retrieved [Manufacturer] from remote data source',
                     data, true);
             }
         };
         
-        var getSessions = function (sessionsObservable) {
-            var query = EntityQuery.from('Sessions')
-                .orderBy('timeSlotId, level, speaker.firstName');
+        var getBikeModels = function (bikeModelsObservable) {
+            var query = entityQuery.from('BikeModels')
+                .orderBy('name');
 
             return manager.executeQuery(query)
                 .then(querySucceeded)
                 .fail(queryFailed);
 
             function querySucceeded(data) {
-                if (sessionsObservable) {
-                    sessionsObservable(data.results);
+                if (bikeModelsObservable) {
+                    bikeModelsObservable(data.results);
                 }
                 log('Retrieved [Sessions] from remote data source',
                     data, true);
@@ -38,12 +38,12 @@
         };
 
         var primeData = function () {
-            return Q.all([getLookups(), getSpeakers()]);
+            return Q.all([getManufacturers()]);
         };
 
         var datacontext = {
-            getSessions: getSessions,
-            getSpeakers: getSpeakers,
+            getManufacturers: getManufacturers,
+            getBikeModels: getBikeModels,
             primeData: primeData
         };
 
@@ -60,12 +60,6 @@
             var mgr = new breeze.EntityManager(config.remoteServiceName);
             model.configureMetadataStore(mgr.metadataStore);
             return mgr;
-        }
-
-        function getLookups() {
-            return EntityQuery.from('Lookups')
-                .using(manager).execute()
-                .fail(queryFailed);
         }
 
         function log(msg, data, showToast) {

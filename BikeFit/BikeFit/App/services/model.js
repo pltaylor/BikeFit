@@ -16,15 +16,15 @@
     }
 
     function manufacturerInitializer(manufacturer) {
-        
+        //Add computed observables here
     };
 
     function bikeModelInitializer(bikeModel) {
-        
+        //Add computed observables here
     };
     
     function bikeSizeInitializer(bikeSize) {
-        
+        //Add computed observables here
     }
     
     //#endregion

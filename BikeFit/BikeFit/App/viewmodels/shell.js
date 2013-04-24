@@ -1,7 +1,8 @@
 ﻿define(['durandal/system',
         'durandal/plugins/router',
-        'services/logger'],
-    function (system, router, logger) {
+        'services/logger',
+        'services/datacontext'],
+    function (system, router, logger, datacontext) {
         var shell = {
             activate: activate,
             router: router
@@ -11,7 +12,9 @@
 
         //#region Internal Methods
         function activate() {
-            return boot();
+            return datacontext.primeData()
+                .then(boot)
+                .fail(failedInitialization);
         }
 
         function boot() {
@@ -21,6 +24,11 @@
             return router.activate('home');
         }
 
+        function failedInitialization(error) {
+            var msg = 'App initialization failed: ' + error.message;
+            logger.logError(msg, error, system.getModuleId(shell), true);
+        }
+        
         function log(msg, data, showToast) {
             logger.log(msg, data, system.getModuleId(shell), showToast);
         }

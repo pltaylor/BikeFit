@@ -24,18 +24,18 @@ namespace BikeFit.Migrations
             //
 
 
-            context.Manufacturers.AddOrUpdate(
-                p => p.Name, 
-                new Manufacturer { ManufacturerID = new Guid("BB66B3AD-B5E5-4D69-8607-08F3D0CCB66A"), Name = "Cervelo" },
-                new Manufacturer { ManufacturerID = new Guid("8F64969C-8578-4502-92A4-1B93D4DCDDCB"), Name = "Cannondale" },
-                new Manufacturer { ManufacturerID = new Guid("E9281EDE-4EA4-415F-A7AA-9FF97C65C5DF"), Name = "Felt" },
-                new Manufacturer { ManufacturerID = new Guid("F41C7D8D-E17D-43B0-BC60-636DE32838A0"), Name = "Kestral" },
-                new Manufacturer { ManufacturerID = new Guid("4883FE87-10C7-4CED-A03D-5BA61A13F35B"), Name = "Specialized" },
-                new Manufacturer { ManufacturerID = new Guid("A64C180D-BBD0-43C9-AEDC-1EFFB41262BF"), Name = "Trek" },
-                new Manufacturer { ManufacturerID = new Guid("92689349-5BF9-4299-8155-D18812467169"), Name = "Quintana Roo" }
-                );
+            //context.Manufacturers.AddOrUpdate(
+            //    p => p.Name, 
+            //    new Manufacturer { ManufacturerID = new Guid("BB66B3AD-B5E5-4D69-8607-08F3D0CCB66A"), Name = "Cervelo" },
+            //    new Manufacturer { ManufacturerID = new Guid("8F64969C-8578-4502-92A4-1B93D4DCDDCB"), Name = "Cannondale" },
+            //    new Manufacturer { ManufacturerID = new Guid("E9281EDE-4EA4-415F-A7AA-9FF97C65C5DF"), Name = "Felt" },
+            //    new Manufacturer { ManufacturerID = new Guid("F41C7D8D-E17D-43B0-BC60-636DE32838A0"), Name = "Kestral" },
+            //    new Manufacturer { ManufacturerID = new Guid("4883FE87-10C7-4CED-A03D-5BA61A13F35B"), Name = "Specialized" },
+            //    new Manufacturer { ManufacturerID = new Guid("A64C180D-BBD0-43C9-AEDC-1EFFB41262BF"), Name = "Trek" },
+            //    new Manufacturer { ManufacturerID = new Guid("92689349-5BF9-4299-8155-D18812467169"), Name = "Quintana Roo" }
+            //    );
 
-            context.SaveChanges();
+            //context.SaveChanges();
 
             //context.BikeModels.AddOrUpdate(
             //    p => p.BikeModelID,
@@ -47,38 +47,38 @@ namespace BikeFit.Migrations
 
             //context.SaveChanges();
 
-            context.BikeSizes.AddOrUpdate(
-                p => p.Size,
-                new BikeSize { 
-                    BikeModel = context.BikeModels.First(p => p.Name == "P2C"), 
-                    SizeID = new Guid("DED67998-037C-436C-9E3D-A5EC695424F7"), 
-                    Size = 51, 
-                    WheelSize = WheelSize.SevenHundred, 
-                    HeadTubeAngle = 72.5, 
-                    BottomBracketDrop = 60,
-                    HeadTubeLength = 90,
-                    FrontCenter = 586,
-                    RearCenter = 380,
-                    Stack = 482,
-                    Reach = 405
-                },
-                new BikeSize
-                {
-                    BikeModel = context.BikeModels.First(p => p.Name == "P2C"),
-                    SizeID = new Guid("D912436A-F0D7-4402-AE57-4BD01BF83DD2"),
-                    Size = 54,
-                    WheelSize = WheelSize.SevenHundred,
-                    HeadTubeAngle = 72.5,
-                    BottomBracketDrop = 60,
-                    HeadTubeLength = 121,
-                    FrontCenter = 609,
-                    RearCenter = 380,
-                    Stack = 512,
-                    Reach = 418
-                }
-                );
+            //context.BikeSizes.AddOrUpdate(
+            //    p => p.Size,
+            //    new BikeSize { 
+            //        BikeModel = context.BikeModels.First(p => p.Name == "P2C"), 
+            //        SizeID = new Guid("DED67998-037C-436C-9E3D-A5EC695424F7"), 
+            //        Size = 51, 
+            //        WheelSize = WheelSize.SevenHundred, 
+            //        HeadTubeAngle = 72.5, 
+            //        BottomBracketDrop = 60,
+            //        HeadTubeLength = 90,
+            //        FrontCenter = 586,
+            //        RearCenter = 380,
+            //        Stack = 482,
+            //        Reach = 405
+            //    },
+            //    new BikeSize
+            //    {
+            //        BikeModel = context.BikeModels.First(p => p.Name == "P2C"),
+            //        SizeID = new Guid("D912436A-F0D7-4402-AE57-4BD01BF83DD2"),
+            //        Size = 54,
+            //        WheelSize = WheelSize.SevenHundred,
+            //        HeadTubeAngle = 72.5,
+            //        BottomBracketDrop = 60,
+            //        HeadTubeLength = 121,
+            //        FrontCenter = 609,
+            //        RearCenter = 380,
+            //        Stack = 512,
+            //        Reach = 418
+            //    }
+            //    );
             
-            context.SaveChanges();
+            //context.SaveChanges();
         }
     }
 }
