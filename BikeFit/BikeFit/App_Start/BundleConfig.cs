@@ -29,6 +29,7 @@ namespace BikeFit
                 .Include("~/Content/bootstrap-responsive.css")
                 .Include("~/Content/durandal.css")
                 .Include("~/Content/toastr.css")
+                .Include("~/Content/styles.css")
                 .Include("~/Content/app.css")
               );
         }

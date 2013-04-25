@@ -901,3 +901,9 @@ nav label
     }
 }
 /* #endregion */
+
+.frame-canvas {
+    position: absolute;
+    top: 0;
+    left: 280px;
+}

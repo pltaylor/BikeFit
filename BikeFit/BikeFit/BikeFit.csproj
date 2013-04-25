@@ -215,7 +215,6 @@
     <Content Include="App\viewmodels\home.js" />
     <Content Include="App\viewmodels\shell.js" />
     <Content Include="App\views\frames.html" />
-    <Content Include="App\views\footer.html" />
     <Content Include="App\views\frameSelection.html" />
     <Content Include="App\views\home.html" />
     <Content Include="App\views\nav.html" />

@@ -2,12 +2,19 @@
 
     var remoteServiceName = 'api/breeze';
 
-    var xOffset = 0;
-    var scalingFactor = 0;
+    function xOffset(input) {
+        return input + 250;
+    }
+    
+    function yOffset(input) {
+        return (295 - input);
+    }
+    var scalingFactor = .22;
 
     return {
         remoteServiceName: remoteServiceName,
         scalingFactor: scalingFactor,
-        xOffset: xOffset
+        xOffset: xOffset,
+        yOffset: yOffset
     };
 })

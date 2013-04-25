@@ -19,7 +19,7 @@ namespace BikeFit.Models
 
         public BikeModel BikeModel { get; set; }
 
-        public double Size { get; set; }
+        public string Size { get; set; }
 
         public WheelSize WheelSize { get; set; } 
 
