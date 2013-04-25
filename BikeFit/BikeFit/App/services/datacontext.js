@@ -20,8 +20,8 @@
             }
         };
         
-        var getBikeModels = function (bikeModelsObservable) {
-            var query = entityQuery.from('BikeModels')
+        var getBikeModels = function (bikeModelsObservable, manufacturerId) {
+            var query = entityQuery.from('BikeModels').where('manufactuerID', '==', manufacturerId)
                 .orderBy('name');
 
             return manager.executeQuery(query)
@@ -32,7 +32,24 @@
                 if (bikeModelsObservable) {
                     bikeModelsObservable(data.results);
                 }
-                log('Retrieved [Sessions] from remote data source',
+                log('Retrieved [Bike Models] from remote data source',
+                    data, true);
+            }
+        };
+
+        var getBikeSizes = function (bikeSizesObservable, modelId) {
+            var query = entityQuery.from('BikeSizes').where('bikeModelID', '==', modelId)
+                .orderBy('size');
+
+            return manager.executeQuery(query)
+                .then(querySucceeded)
+                .fail(queryFailed);
+
+            function querySucceeded(data) {
+                if (bikeSizesObservable) {
+                    bikeSizesObservable(data.results);
+                }
+                log('Retrieved [Bike Sizes] from remote data source',
                     data, true);
             }
         };
@@ -44,6 +61,7 @@
         var datacontext = {
             getManufacturers: getManufacturers,
             getBikeModels: getBikeModels,
+            getBikeSizes: getBikeSizes,
             primeData: primeData
         };
 
