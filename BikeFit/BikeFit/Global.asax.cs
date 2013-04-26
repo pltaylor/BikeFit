@@ -3,6 +3,7 @@ using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
 
+﻿using BikeFit.App_Start;
 ﻿using BikeFit.DataLayer;
 ﻿using BikeFit.Migrations;
 

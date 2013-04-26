@@ -627,27 +627,7 @@ div.article-counter > address {
 
 /* #endregion */
 
-/* #region Fonts */
-
-body,
-button,
-input,
-textarea,
-select
-{
-    font-size: 100%;
-    font-family: "Segoe UI Light", "Segoe Light", "Segoe UI", "Helvetica-Light", Arial, Helvetica, sans-serif;
-}
-/* #endregion */
-
 /* #region Elements */
-
-input,
-textarea,
-select
-{
-    padding: 3px;
-}
 
 nav label,
 small

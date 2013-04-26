@@ -3,9 +3,9 @@
     function (logger, datacontext) {
     var manufacturers = ko.observableArray();
 
-    var frame1 = createFrame('bike1', 'orange');
-    var frame2 = createFrame('bike2', 'green');
-    var frame3 = createFrame('bike3', 'purple');
+    var frame1 = createFrame('Frame 1','bike1', 'orange');
+    var frame2 = createFrame('Frame 2','bike2', 'green');
+    var frame3 = createFrame('Frame 3','bike3', 'purple');
 
     var vm = {
         activate: activate,
@@ -27,7 +27,7 @@
         return true;
     }
         
-    function createFrame(canvasName, color) {
+    function createFrame(name, canvasName, color) {
         var manufacturer = ko.observable();
         manufacturer.subscribe(function(newValue) {
             datacontext.getBikeModels(models, newValue.manufacturerID());
@@ -46,6 +46,7 @@
         });
 
         var output = {
+            name : name,
             manufacturer: manufacturer,
             models: models,
             model: model,

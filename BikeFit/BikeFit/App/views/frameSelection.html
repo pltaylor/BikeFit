@@ -1,4 +1,5 @@
-﻿<form class="form-horizontal">
+﻿<h3 class="text-center" data-bind="text: name"></h3>
+<form class="form-horizontal">
     <div class="control-group">
         <label class="control-label" for="manufacturer">Manufacturer:</label>
         <div class="controls">
@@ -18,75 +19,24 @@
         </div>
     </div>
     <div data-bind="with: size">
-        <div class="titleblock">
-            <label>Geometry</label>
-        </div>
-        <div class="details-left">
-            <div>
-                <span>BB X:</span>
-                <span data-bind="text: bbXloc"></span>
-            </div>
-            <div>
-                <span>BB Y:</span>
-                <span data-bind="text: bbYloc"></span>
-            </div>
-            <div>
-                <span>Wheel Radius:</span>
-                <span data-bind="text: wheelRadius"></span>
-            </div>
-            <div>
-                <span>Stack:</span>
-                <span data-bind="text: stack"></span>
-            </div>
-            <div>
-                <span>Reach:</span>
-                <span data-bind="text: reach"></span>
-            </div>
-            <div>
-                <span>Head Tube Top X:</span>
-                <span data-bind="text: headTubeTopXloc"></span>
-            </div>
-            <div>
-                <span>Head Tube Top Y:</span>
-                <span data-bind="text: headTubeTopYloc"></span>
-            </div>
-            <div>
-                <span>Head Tube Bottom X:</span>
-                <span data-bind="text: headTubeBottomXloc"></span>
-            </div>
-            <div>
-                <span>Head Tube Bottom Y:</span>
-                <span data-bind="text: headTubeBottomYloc"></span>
-            </div>
-            <div>
-                <span>Front Wheel X:</span>
-                <span data-bind="text: frontWheelXloc"></span>
-            </div>
-            <div>
-                <span>Front Wheel Y:</span>
-                <span data-bind="text: frontWheelYloc"></span>
-            </div>
-            <div>
-                <span>Rear Wheel X:</span>
-                <span data-bind="text: rearWheelXloc"></span>
-            </div>
-            <div>
-                <span>Rear Wheel Y:</span>
-                <span data-bind="text: rearWheelYloc"></span>
-            </div>
-            <div>
-                <span>Seat Tube Angle:</span>
-                <span data-bind="text: avgSeatTubeAngle"></span>
-            </div>
-            <div>
-                <span>Seat Tube X:</span>
-                <span data-bind="text: seatTubeXloc"></span>
-            </div>
-            <div>
-                <span>Seat Tube  Y:</span>
-                <span data-bind="text: seatTubeYloc"></span>
-            </div>
-        </div>
-
+        <h3 class="text-center">Geometry</h3>
+        <dl class="dl-horizontal">
+            <dt>Stack:</dt>
+            <dd data-bind="text: stackFormatted"></dd>
+            <dt>Reach:</dt>
+            <dd data-bind="text: reachFormatted"></dd>
+            <dt>Front Center:</dt>
+            <dd data-bind="text: frontCenterFormatted"></dd>
+            <dt>Rear Center:</dt>
+            <dd data-bind="text: rearCenterFormatted"></dd>
+            <dt>Head Tube:</dt>
+            <dd data-bind="text: headTubeLengthFormatted"></dd>
+            <dt>Min Seat Angle:</dt>
+            <dd data-bind="text: minSeatAngleFormatted"></dd>
+            <dt>Min Seat Angle:</dt>
+            <dd data-bind="text: maxSeatAngleFormatted"></dd>
+            <dt>Wheel Size:</dt>
+            <dd data-bind="text: wheelSizeFormatted"></dd>
+        </dl>
     </div>
 </form>

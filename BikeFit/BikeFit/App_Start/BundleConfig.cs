@@ -1,7 +1,7 @@
 using System;
 using System.Web.Optimization;
 
-namespace BikeFit
+namespace BikeFit.App_Start
 {
     public class BundleConfig
     {

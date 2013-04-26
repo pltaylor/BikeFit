@@ -90,6 +90,42 @@
         bikeSize.seatTubeYloc = ko.computed(function () {
             return bikeSize.headTubeTopYloc();
         });
+
+        bikeSize.wheelSizeFormatted = ko.computed(function() {
+            if (bikeSize.wheelSize() == "SevenHundred") {
+                return "700c";
+            } else {
+                return "650c";
+            }
+        });
+
+        bikeSize.stackFormatted = ko.computed(function() {
+            return bikeSize.stack() + 'mm';
+        });
+
+        bikeSize.reachFormatted = ko.computed(function () {
+            return bikeSize.reach() + 'mm';
+        });
+
+        bikeSize.frontCenterFormatted = ko.computed(function () {
+            return bikeSize.frontCenter() + 'mm';
+        });
+
+        bikeSize.rearCenterFormatted = ko.computed(function () {
+            return bikeSize.rearCenter() + 'mm';
+        });
+
+        bikeSize.headTubeLengthFormatted = ko.computed(function () {
+            return bikeSize.headTubeLength() + 'mm';
+        });
+
+        bikeSize.minSeatAngleFormatted = ko.computed(function () {
+            return bikeSize.minSeatAngle() + '°';
+        });
+
+        bikeSize.maxSeatAngleFormatted = ko.computed(function () {
+            return bikeSize.maxSeatAngle() + '°';
+        });
     }
 
     //#endregion
