@@ -55,7 +55,16 @@
         };
 
         var primeData = function () {
-            return Q.all([getManufacturers()]);
+            var promise = Q.all([getManufacturers()]);
+
+            return promise.then(success);
+            
+            function success() {
+                datacontext.lookups = {
+                    manufacturers : getLocal('Manufacturers', 'name')
+                };
+            }
+            
         };
 
         var datacontext = {
@@ -68,6 +77,12 @@
         return datacontext;
 
         //#region Internal methods        
+        function getLocal(resource, ordering) {
+            var query = entityQuery.from(resource)
+                .orderBy(ordering);
+            return manager.executeQueryLocally(query);
+        }
+        
         function queryFailed(error) {
             var msg = 'Error retreiving data. ' + error.message;
             logger.logError(msg, error, system.getModuleId(datacontext), true);

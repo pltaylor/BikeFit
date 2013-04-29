@@ -20,10 +20,8 @@
 
     //#region Internal Methods
     function activate() {
-        datacontext.getManufacturers(manufacturers).then(
-            //manufacturers.unshift(ko.observable({ name: 'Please Select One...' }))
-        );
-        logger.log('Frames View Activated', null, 'frames', true);
+        manufacturers(datacontext.lookups.manufacturers);
+        logger.log('Frames View Activated', null, 'frames', false);
         return true;
     }
         

@@ -1,0 +1,31 @@
+﻿<section>
+    <form class="form-horizontal">
+        <div class="control-group">
+            <label class="control-label" for="manufacturer">Manufacturer:</label>
+            <div class="controls">
+                <select class="input-medium" id="manufacturer" data-bind="options: manufacturers, optionsText: 'name', value: manufacturer">
+                </select>
+            </div>
+        </div>
+
+    </form>
+    <div data-bind="foreach: models">
+        <label data-bind="text: name"></label>
+        <table>
+            <thead>
+                <tr>
+                    <th>First name</th>
+                    <th>Last name</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+
+</section>
