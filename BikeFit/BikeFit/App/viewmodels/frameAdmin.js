@@ -3,23 +3,27 @@
     function (logger, datacontext) {
         var manufacturers = ko.observableArray();
         var manufacturer = ko.observable();
-        
+
         manufacturer.subscribe(function (newValue) {
-            datacontext.getBikeModels(models, newValue.manufacturerID());
+            datacontext.getBikeModels(models, newValue.manufacturerID()).then(fillSizes);
+
+            function fillSizes() {
+                for (var i = 0; i < models().length; i++) {
+                    datacontext.getBikeSizes(models()[i].sizes, models()[i].bikeModelID());
+                }
+            }
+
         });
-        
+
         var models = ko.observableArray();
         var model = ko.observable();
-        
-        var sizes = ko.observableArray();
-        
+
         var vm = {
             activate: activate,
             manufacturer: manufacturer,
             manufacturers: manufacturers,
             model: model,
-            models: models,
-            sizes: sizes
+            models: models
         };
 
         return vm;
@@ -30,7 +34,7 @@
             logger.log('Frames View Activated', null, 'frames', false);
             return true;
         }
-        
-        
+
+
         //#endregion
     });

@@ -16,7 +16,7 @@
                     manufacturerObservable(data.results);
                 }
                 log('Retrieved [Manufacturer] from remote data source',
-                    data, true);
+                    data, false);
             }
         };
         
@@ -33,7 +33,7 @@
                     bikeModelsObservable(data.results);
                 }
                 log('Retrieved [Bike Models] from remote data source',
-                    data, true);
+                    data, false);
             }
         };
 
@@ -50,7 +50,7 @@
                     bikeSizesObservable(data.results);
                 }
                 log('Retrieved [Bike Sizes] from remote data source',
-                    data, true);
+                    data, false);
             }
         };
 

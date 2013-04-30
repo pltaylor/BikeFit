@@ -20,7 +20,7 @@
         function boot() {
             router.mapNav('home');
             router.mapNav('frames');
-            router.mapNav('frameAdmin');
+            router.mapNav('frameAdmin', 'viewmodels/frameAdmin', 'Frame Admin');
             log('My Bike Fit Loaded!', null, true);
             return router.activate('home');
         }

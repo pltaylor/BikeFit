@@ -20,7 +20,7 @@
     }
 
     function bikeModelInitializer(bikeModel) {
-        //Add computed observables here
+        bikeModel.sizes = ko.observableArray();
     }
 
     function bikeSizeInitializer(bikeSize) {
