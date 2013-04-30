@@ -21,7 +21,7 @@
             router.mapNav('home');
             router.mapNav('frames');
             router.mapNav('frameAdmin', 'viewmodels/frameAdmin', 'Frame Admin');
-            log('My Bike Fit Loaded!', null, true);
+            log('My Tri Bike Fit Loaded!', null, false);
             return router.activate('home');
         }
 
