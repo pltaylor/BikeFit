@@ -37,6 +37,26 @@
             }
         };
 
+        var getBikeModelsWithSizes = function (bikeModelsObservable, manufacturerId) {
+            var query = entityQuery.from('BikeModels').where('manufactuerID', '==', manufacturerId)
+                .orderBy('name');
+
+            return manager.executeQuery(query)
+                .then(querySucceeded)
+                .fail(queryFailed);
+
+            function querySucceeded(data) {
+                if (bikeModelsObservable) {
+                    for (var i = 0; i < data.results.length; i++) {
+                        datacontext.getBikeSizes(data.results[i].sizes, data.results[i].bikeModelID());
+                    }
+                    bikeModelsObservable(data.results);
+                }
+                log('Retrieved [Bike Models With Sizes] from remote data source',
+                    data, false);
+            }
+        };
+        
         var getBikeSizes = function (bikeSizesObservable, modelId) {
             var query = entityQuery.from('BikeSizes').where('bikeModelID', '==', modelId)
                 .orderBy('size');
@@ -53,7 +73,34 @@
                     data, false);
             }
         };
+        
+        var cancelChanges = function () {
+            manager.rejectChanges();
+            log('Canceled changes', null, true);
+        };
 
+        var saveChanges = function () {
+            return manager.saveChanges()
+                .then(saveSucceeded)
+                .fail(saveFailed);
+
+            function saveSucceeded(saveResult) {
+                log('Saved data successfully', saveResult, true);
+            }
+
+            function saveFailed(error) {
+                var msg = 'Save failed: ' + error.message;
+                logError(msg, error);
+                error.message = msg;
+                throw error;
+            }
+        };
+
+        var hasChanges = ko.observable(false);
+
+        manager.hasChangesChanged.subscribe(function (eventArgs) {
+            hasChanges(eventArgs.hasChanges);
+        });
         var primeData = function () {
             var promise = Q.all([getManufacturers()]);
 
@@ -70,8 +117,12 @@
         var datacontext = {
             getManufacturers: getManufacturers,
             getBikeModels: getBikeModels,
+            getBikeModelsWithSizes: getBikeModelsWithSizes,
             getBikeSizes: getBikeSizes,
-            primeData: primeData
+            hasChanges: hasChanges,
+            primeData: primeData,
+            cancelChanges: cancelChanges,
+            saveChanges: saveChanges
         };
 
         return datacontext;

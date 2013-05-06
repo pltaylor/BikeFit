@@ -1,10 +1,20 @@
 ﻿define(['durandal/system',
         'durandal/plugins/router',
         'services/logger',
+        'config',
         'services/datacontext'],
-    function (system, router, logger, datacontext) {
+    function (system, router, logger, config, datacontext) {
+
+        var adminRoutes = ko.computed(function() {
+            return router.allRoutes().filter(function(r) {
+                return r.settings.admin;
+            });
+        });
+
         var shell = {
             activate: activate,
+            adminRoutes: adminRoutes,
+            goToAdmin: goToAdmin,
             router: router
         };
         
@@ -18,11 +28,13 @@
         }
 
         function boot() {
-            router.mapNav('home');
-            router.mapNav('frames');
-            router.mapNav('frameAdmin', 'viewmodels/frameAdmin', 'Frame Admin');
+            router.map(config.routes);
             log('My Tri Bike Fit Loaded!', null, false);
             return router.activate('home');
+        }
+        
+        function goToAdmin(item) {
+            router.navigateTo(item.hash);
         }
 
         function failedInitialization(error) {

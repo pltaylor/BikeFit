@@ -6,6 +6,8 @@ using BikeFit.Models;
 
 using Breeze.WebApi;
 
+using Newtonsoft.Json.Linq;
+
 namespace BikeFit.Controllers
 {
     [BreezeController]
@@ -35,6 +37,12 @@ namespace BikeFit.Controllers
         public IQueryable<BikeSize> BikeSizes()
         {
             return contextProvider.Context.BikeSizes;
+        }
+
+        [HttpPost]
+        public SaveResult SaveChanges(JObject saveBundle)
+        {
+            return contextProvider.SaveChanges(saveBundle);
         }
 
     }

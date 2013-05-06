@@ -3,34 +3,69 @@
     function (logger, datacontext) {
         var manufacturers = ko.observableArray();
         var manufacturer = ko.observable();
+        var isSaving = ko.observable(false);
+        var modelsWithSizes = ko.observableArray();
 
         manufacturer.subscribe(function (newValue) {
-            datacontext.getBikeModels(models, newValue.manufacturerID()).then(fillSizes);
-
-            function fillSizes() {
-                for (var i = 0; i < models().length; i++) {
-                    datacontext.getBikeSizes(models()[i].sizes, models()[i].bikeModelID());
-                }
-            }
-
+            datacontext.getBikeModelsWithSizes(modelsWithSizes, newValue.manufacturerID());
         });
 
-        var models = ko.observableArray();
-        var model = ko.observable();
+
+        var hasChanges = ko.computed(function () {
+            return datacontext.hasChanges();
+        });
+
+        var cancel = function () {
+            datacontext.cancelChanges();
+        };
+
+        var canSave = ko.computed(function () {
+            return hasChanges() && !isSaving();
+        });
+
+        var save = function () {
+            isSaving(true);
+            return datacontext.saveChanges().fin(complete);
+
+            function complete() {
+                isSaving(false);
+            }
+        };
+
+        var canDeactivate = function () {
+            if (hasChanges()) {
+                var title = 'Do you want to leave ?';
+                var msg = 'Navigate away and cancel your changes?';
+                var checkAnswer = function (selectedOption) {
+                    if (selectedOption === 'Yes') {
+                        cancel();
+                    }
+                    return selectedOption;
+                };
+                return app.showMessage(title, msg, ['Yes', 'No'])
+                    .then(checkAnswer);
+
+            }
+            return true;
+        };
 
         var vm = {
             activate: activate,
-            manufacturer: manufacturer,
+            cancel: cancel,
+            canDeactivate: canDeactivate,
+            canSave: canSave,
+            hasChanges: hasChanges,
+            manu: manufacturer,
             manufacturers: manufacturers,
-            model: model,
-            models: models
+            modelsWithSizes: modelsWithSizes,
+            save: save
         };
 
         return vm;
 
         //#region Internal Methods
         function activate() {
-            manufacturers(datacontext.lookups.manufacturers);
+            manufacturers(datacontext.lookups.manufacturers),
             logger.log('Frames View Activated', null, 'frames', false);
             return true;
         }
