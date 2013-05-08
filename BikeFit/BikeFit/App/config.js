@@ -1,6 +1,6 @@
 ﻿define(function() {
 
-    var remoteServiceName = 'api/breeze';
+    var remoteServiceName = 'breeze/breeze';
 
     function xOffset(input) {
         return input + 250;

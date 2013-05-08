@@ -102,13 +102,15 @@
             hasChanges(eventArgs.hasChanges);
         });
         var primeData = function () {
-            var promise = Q.all([getManufacturers()]);
+            var promise = Q.all([getManufacturers()])
+                .then(processLookups);
 
             return promise.then(success);
             
             function success() {
                 datacontext.lookups = {
-                    manufacturers : getLocal('Manufacturers', 'name')
+                    manufacturers: function ()
+                    { return getLocal('Manufacturers', 'name', true); }
                 };
             }
             
@@ -128,9 +130,12 @@
         return datacontext;
 
         //#region Internal methods        
-        function getLocal(resource, ordering) {
+        function getLocal(resource, ordering, includeNullos) {
             var query = entityQuery.from(resource)
                 .orderBy(ordering);
+            if (!includeNullos) {
+                query = query.where('id', '!=', 0);
+            }
             return manager.executeQueryLocally(query);
         }
         
@@ -148,6 +153,10 @@
 
         function log(msg, data, showToast) {
             logger.log(msg, data, system.getModuleId(datacontext), showToast);
+        }
+        
+        function processLookups() {
+            model.createNullos(manager);
         }
         //#endregion
 });

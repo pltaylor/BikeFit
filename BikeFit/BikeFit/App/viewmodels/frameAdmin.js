@@ -10,7 +10,6 @@
             datacontext.getBikeModelsWithSizes(modelsWithSizes, newValue.manufacturerID());
         });
 
-
         var hasChanges = ko.computed(function () {
             return datacontext.hasChanges();
         });
@@ -64,12 +63,21 @@
         return vm;
 
         //#region Internal Methods
-        function activate() {
-            manufacturers(datacontext.lookups.manufacturers),
-            logger.log('Frames View Activated', null, 'frames', false);
-            return true;
-        }
+        //function activate() {
+        //    manufacturers(datacontext.lookups.manufacturers),
+        //    //var promise = Q.all([datacontext.getManufacturers(manufacturers)]);
+        //    logger.log('Frames Admin View Activated', null, 'frames', false);
+        //    return promise;
+        //}
 
+        function activate() {
+            var manufacturesPromise = datacontext.lookups.manufacturers();
+            logger.log('Frames View Activated', null, 'frames', false);
+
+            return $.when(manufacturesPromise).then(function (results) {
+                manufacturers(results);
+            });
+        }
 
         //#endregion
     });

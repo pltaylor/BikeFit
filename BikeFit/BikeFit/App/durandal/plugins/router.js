@@ -250,9 +250,9 @@
         },
         onNavigationComplete: function (routeInfo, params, module) {
             if (app.title) {
-                document.title = routeInfo.caption + " | " + app.title;
+                document.title = routeInfo.name + " | " + app.title;
             } else {
-                document.title = routeInfo.caption;
+                document.title = routeInfo.name;
             }
         },
         navigateBack: function () {

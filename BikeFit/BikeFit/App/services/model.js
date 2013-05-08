@@ -1,6 +1,13 @@
 ﻿define(['config'], function (config) {
+    
+    var entityNames = {
+        manufacturer: 'Manufacturer'
+    };
+    
     var model = {
-        configureMetadataStore: configureMetadataStore
+        configureMetadataStore: configureMetadataStore,
+        createNullos: createNullos,
+        entityNames: entityNames
     };
 
     return model;
@@ -15,6 +22,19 @@
             'BikeSize', null, bikeSizeInitializer);
     }
 
+    function createNullos(manager) {
+        var unchanged = breeze.EntityState.Unchanged;
+
+        createNullo(entityNames.manufacturer);
+
+        function createNullo(entityName, values) {
+            var initialValues = values
+                || { name: ' Select a ' + entityName };
+            return manager.createEntity(entityName, initialValues, unchanged);
+        }
+
+    }
+    
     function manufacturerInitializer(manufacturer) {
         //Add computed observables here
     }
