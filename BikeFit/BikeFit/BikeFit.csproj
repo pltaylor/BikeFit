@@ -45,6 +45,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Breeze.WebApi.1.3.2\lib\Breeze.WebApi.dll</HintPath>
     </Reference>
+    <Reference Include="DotNetOpenAuth.AspNet">
+      <HintPath>..\packages\DotNetOpenAuth.AspNet.4.3.0.13117\lib\net45-full\DotNetOpenAuth.AspNet.dll</HintPath>
+    </Reference>
     <Reference Include="DotNetOpenAuth.Core">
       <HintPath>..\packages\DotNetOpenAuth.Core.4.3.0.13117\lib\net45-full\DotNetOpenAuth.Core.dll</HintPath>
     </Reference>
@@ -232,11 +235,13 @@
     <Content Include="App\viewmodels\frames.js" />
     <Content Include="App\viewmodels\frameAdmin.js" />
     <Content Include="App\viewmodels\home.js" />
+    <Content Include="App\viewmodels\login.js" />
     <Content Include="App\viewmodels\shell.js" />
     <Content Include="App\views\frameAdmin.html" />
     <Content Include="App\views\frames.html" />
     <Content Include="App\views\frameSelection.html" />
     <Content Include="App\views\home.html" />
+    <Content Include="App\views\login.html" />
     <Content Include="App\views\nav.html" />
     <Content Include="App\views\shell.html" />
     <Content Include="App_Data\BikeFit.DataLayer.BikeFitContext.mdf" />
