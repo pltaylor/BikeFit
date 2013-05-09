@@ -1,152 +1,154 @@
-﻿define(['config'], function (config) {
-    
-    var entityNames = {
-        manufacturer: 'Manufacturer'
-    };
-    
-    var model = {
-        configureMetadataStore: configureMetadataStore,
-        createNullos: createNullos,
-        entityNames: entityNames
-    };
+﻿define(['config'],
+    function (config) {
+        var entityNames = {
+            bikeModel: 'BikeModel',
+            bikeSize: 'BikeSize',
+            manufacturer: 'Manufacturer'
+        };
 
-    return model;
+        var model = {
+            configureMetadataStore: configureMetadataStore,
+            createNullos: createNullos,
+            entityNames: entityNames
+        };
 
-    //#region Internal Methods
-    function configureMetadataStore(metadataStore) {
-        metadataStore.registerEntityTypeCtor(
-            'Manufacturer', null, manufacturerInitializer);
-        metadataStore.registerEntityTypeCtor(
-            'BikeModel', null, bikeModelInitializer);
-        metadataStore.registerEntityTypeCtor(
-            'BikeSize', null, bikeSizeInitializer);
-    }
+        return model;
 
-    function createNullos(manager) {
-        var unchanged = breeze.EntityState.Unchanged;
-
-        createNullo(entityNames.manufacturer);
-
-        function createNullo(entityName, values) {
-            var initialValues = values
-                || { name: ' Select a ' + entityName };
-            return manager.createEntity(entityName, initialValues, unchanged);
+        //#region Internal Methods
+        function configureMetadataStore(metadataStore) {
+            metadataStore.registerEntityTypeCtor(
+                'Manufacturer', null, manufacturerInitializer);
+            metadataStore.registerEntityTypeCtor(
+                'BikeModel', null, bikeModelInitializer);
+            metadataStore.registerEntityTypeCtor(
+                'BikeSize', null, bikeSizeInitializer);
         }
 
-    }
-    
-    function manufacturerInitializer(manufacturer) {
-        //Add computed observables here
-    }
+        function createNullos(manager) {
+            var unchanged = breeze.EntityState.Unchanged;
 
-    function bikeModelInitializer(bikeModel) {
-        bikeModel.sizes = ko.observableArray();
-    }
+            createNullo(entityNames.manufacturer);
 
-    function bikeSizeInitializer(bikeSize) {
-
-        // based off a 700cc wheel with a 23mm tire and 650 wheel with 23mm tire
-        bikeSize.wheelRadius = ko.computed(function () {
-            var radius;
-            if (bikeSize.wheelSize() == "SevenHundred") {
-                radius = 668 / 2;
-            } else {
-                radius = 617.0 / 2;
+            function createNullo(entityName, values) {
+                var initialValues = values
+                    || { name: ' Select a ' + entityName };
+                return manager.createEntity(entityName, initialValues, unchanged);
             }
-            return radius * config.scalingFactor;
-        });
-        
-        bikeSize.bbXloc = ko.computed(function () {
-            return config.xOffset(0.0);
-        });
 
-        bikeSize.bbYloc = ko.computed(function () {
-            return config.yOffset(bikeSize.wheelRadius() - (bikeSize.bottomBracketDrop() * config.scalingFactor));
-        });
+        }
 
-        bikeSize.headTubeTopXloc = ko.computed(function() {
-            return bikeSize.bbXloc() + (bikeSize.reach() * config.scalingFactor);
-        });
+        function manufacturerInitializer(manufacturer) {
+            //Add computed observables here
+        }
 
-        bikeSize.headTubeTopYloc = ko.computed(function () {
-            return bikeSize.bbYloc() - (bikeSize.stack() * config.scalingFactor);
-        });
+        function bikeModelInitializer(bikeModel) {
+            bikeModel.sizes = ko.observableArray();
+        }
 
-        bikeSize.headTubeBottomXloc = ko.computed(function () {
-            var xDelta = Math.sin((90 - bikeSize.headTubeAngle()) * (Math.PI / 180)) * (bikeSize.headTubeLength() * config.scalingFactor);
-            return bikeSize.headTubeTopXloc() + xDelta;
-        });
+        function bikeSizeInitializer(bikeSize) {
 
-        bikeSize.headTubeBottomYloc = ko.computed(function () {
-            var yDelta = Math.cos((90 - bikeSize.headTubeAngle()) * (Math.PI / 180)) * (bikeSize.headTubeLength() * config.scalingFactor);
-            return bikeSize.headTubeTopYloc() + yDelta;
-        });
+            // based off a 700cc wheel with a 23mm tire and 650 wheel with 23mm tire
+            bikeSize.wheelRadius = ko.computed(function () {
+                var radius;
+                if (bikeSize.wheelSize() == "SevenHundred") {
+                    radius = 668 / 2;
+                } else {
+                    radius = 617.0 / 2;
+                }
+                return radius * config.scalingFactor;
+            });
 
-        bikeSize.rearWheelXloc = ko.computed(function () {
-            return config.xOffset(-Math.sqrt(Math.pow(bikeSize.rearCenter(), 2) - Math.pow(bikeSize.bottomBracketDrop(), 2)) * config.scalingFactor);
-        });
+            bikeSize.bbXloc = ko.computed(function () {
+                return config.xOffset(0.0);
+            });
 
-        bikeSize.rearWheelYloc = ko.computed(function () {
-            return config.yOffset(bikeSize.wheelRadius());
-        });
+            bikeSize.bbYloc = ko.computed(function () {
+                return config.yOffset(bikeSize.wheelRadius() - (bikeSize.bottomBracketDrop() * config.scalingFactor));
+            });
 
-        bikeSize.frontWheelXloc = ko.computed(function () {
-            return config.xOffset(Math.sqrt(Math.pow(bikeSize.frontCenter(), 2) - Math.pow(bikeSize.bottomBracketDrop(), 2)) * config.scalingFactor);
-        });
+            bikeSize.headTubeTopXloc = ko.computed(function () {
+                return bikeSize.bbXloc() + (bikeSize.reach() * config.scalingFactor);
+            });
 
-        bikeSize.frontWheelYloc = ko.computed(function () {
-            return config.yOffset(bikeSize.wheelRadius());
-        });
+            bikeSize.headTubeTopYloc = ko.computed(function () {
+                return bikeSize.bbYloc() - (bikeSize.stack() * config.scalingFactor);
+            });
 
-        bikeSize.avgSeatTubeAngle = ko.computed(function () {
-            return (bikeSize.maxSeatAngle() + bikeSize.minSeatAngle()) / 2;
-        });
+            bikeSize.headTubeBottomXloc = ko.computed(function () {
+                var xDelta = Math.sin((90 - bikeSize.headTubeAngle()) * (Math.PI / 180)) * (bikeSize.headTubeLength() * config.scalingFactor);
+                return bikeSize.headTubeTopXloc() + xDelta;
+            });
 
-        bikeSize.seatTubeXloc = ko.computed(function () {
-            var xDelta = Math.tan((90 - bikeSize.avgSeatTubeAngle()) * (Math.PI / 180)) * bikeSize.stack();
-            return bikeSize.bbXloc() - (xDelta * config.scalingFactor);
-        });
+            bikeSize.headTubeBottomYloc = ko.computed(function () {
+                var yDelta = Math.cos((90 - bikeSize.headTubeAngle()) * (Math.PI / 180)) * (bikeSize.headTubeLength() * config.scalingFactor);
+                return bikeSize.headTubeTopYloc() + yDelta;
+            });
 
-        bikeSize.seatTubeYloc = ko.computed(function () {
-            return bikeSize.headTubeTopYloc();
-        });
+            bikeSize.rearWheelXloc = ko.computed(function () {
+                return config.xOffset(-Math.sqrt(Math.pow(bikeSize.rearCenter(), 2) - Math.pow(bikeSize.bottomBracketDrop(), 2)) * config.scalingFactor);
+            });
 
-        bikeSize.wheelSizeFormatted = ko.computed(function() {
-            if (bikeSize.wheelSize() == "SevenHundred") {
-                return "700c";
-            } else {
-                return "650c";
-            }
-        });
+            bikeSize.rearWheelYloc = ko.computed(function () {
+                return config.yOffset(bikeSize.wheelRadius());
+            });
 
-        bikeSize.stackFormatted = ko.computed(function() {
-            return bikeSize.stack() + 'mm';
-        });
+            bikeSize.frontWheelXloc = ko.computed(function () {
+                return config.xOffset(Math.sqrt(Math.pow(bikeSize.frontCenter(), 2) - Math.pow(bikeSize.bottomBracketDrop(), 2)) * config.scalingFactor);
+            });
 
-        bikeSize.reachFormatted = ko.computed(function () {
-            return bikeSize.reach() + 'mm';
-        });
+            bikeSize.frontWheelYloc = ko.computed(function () {
+                return config.yOffset(bikeSize.wheelRadius());
+            });
 
-        bikeSize.frontCenterFormatted = ko.computed(function () {
-            return bikeSize.frontCenter() + 'mm';
-        });
+            bikeSize.avgSeatTubeAngle = ko.computed(function () {
+                return (bikeSize.maxSeatAngle() + bikeSize.minSeatAngle()) / 2;
+            });
 
-        bikeSize.rearCenterFormatted = ko.computed(function () {
-            return bikeSize.rearCenter() + 'mm';
-        });
+            bikeSize.seatTubeXloc = ko.computed(function () {
+                var xDelta = Math.tan((90 - bikeSize.avgSeatTubeAngle()) * (Math.PI / 180)) * bikeSize.stack();
+                return bikeSize.bbXloc() - (xDelta * config.scalingFactor);
+            });
 
-        bikeSize.headTubeLengthFormatted = ko.computed(function () {
-            return bikeSize.headTubeLength() + 'mm';
-        });
+            bikeSize.seatTubeYloc = ko.computed(function () {
+                return bikeSize.headTubeTopYloc();
+            });
 
-        bikeSize.minSeatAngleFormatted = ko.computed(function () {
-            return bikeSize.minSeatAngle() + '°';
-        });
+            bikeSize.wheelSizeFormatted = ko.computed(function () {
+                if (bikeSize.wheelSize() == "SevenHundred") {
+                    return "700c";
+                } else {
+                    return "650c";
+                }
+            });
 
-        bikeSize.maxSeatAngleFormatted = ko.computed(function () {
-            return bikeSize.maxSeatAngle() + '°';
-        });
-    }
+            bikeSize.stackFormatted = ko.computed(function () {
+                return bikeSize.stack() + 'mm';
+            });
 
-    //#endregion
-});
+            bikeSize.reachFormatted = ko.computed(function () {
+                return bikeSize.reach() + 'mm';
+            });
+
+            bikeSize.frontCenterFormatted = ko.computed(function () {
+                return bikeSize.frontCenter() + 'mm';
+            });
+
+            bikeSize.rearCenterFormatted = ko.computed(function () {
+                return bikeSize.rearCenter() + 'mm';
+            });
+
+            bikeSize.headTubeLengthFormatted = ko.computed(function () {
+                return bikeSize.headTubeLength() + 'mm';
+            });
+
+            bikeSize.minSeatAngleFormatted = ko.computed(function () {
+                return bikeSize.minSeatAngle() + '°';
+            });
+
+            bikeSize.maxSeatAngleFormatted = ko.computed(function () {
+                return bikeSize.maxSeatAngle() + '°';
+            });
+        }
+
+        //#endregion
+    });

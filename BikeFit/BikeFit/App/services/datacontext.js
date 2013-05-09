@@ -2,6 +2,12 @@
     function (system, model, config, logger) {
         var entityQuery = breeze.EntityQuery,
             manager = configureBreezeManager();
+
+        var entityNames = model.entityNames;
+        
+        var createNewSize = function (modelId) {
+            return manager.createEntity(entityNames.bikeSize, { sizeID: breeze.core.getUuid(), bikeModelID: modelId });
+        };
         
         var getManufacturers = function (manufacturerObservable) {
             var query = entityQuery.from('Manufacturers')
@@ -49,8 +55,15 @@
                 if (bikeModelsObservable) {
                     for (var i = 0; i < data.results.length; i++) {
                         datacontext.getBikeSizes(data.results[i].sizes, data.results[i].bikeModelID());
+
+                        // add new size function
+                        data.results[i].addNewSize = function () {
+                            return createNewSize(this.bikeModelID());
+                            //this.sizes.push(newSize);
+                        };
                     }
                     bikeModelsObservable(data.results);
+
                 }
                 log('Retrieved [Bike Models With Sizes] from remote data source',
                     data, false);

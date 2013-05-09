@@ -1,5 +1,5 @@
 ﻿define(['services/logger',
-        "services/datacontext"],
+        'services/datacontext'],
     function (logger, datacontext) {
         var manufacturers = ko.observableArray();
         var manufacturer = ko.observable();
@@ -8,6 +8,7 @@
 
         manufacturer.subscribe(function (newValue) {
             datacontext.getBikeModelsWithSizes(modelsWithSizes, newValue.manufacturerID());
+            
         });
 
         var hasChanges = ko.computed(function () {
@@ -72,7 +73,7 @@
 
         function activate() {
             var manufacturesPromise = datacontext.lookups.manufacturers();
-            logger.log('Frames View Activated', null, 'frames', false);
+            logger.log('Frames Admin View Activated', null, 'frames', false);
 
             return $.when(manufacturesPromise).then(function (results) {
                 manufacturers(results);

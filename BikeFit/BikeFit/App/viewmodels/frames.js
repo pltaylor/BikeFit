@@ -20,9 +20,12 @@
 
     //#region Internal Methods
     function activate() {
-        manufacturers(datacontext.lookups.manufacturers);
+        var manufacturesPromise = datacontext.lookups.manufacturers();
         logger.log('Frames View Activated', null, 'frames', false);
-        return promise;
+
+        return $.when(manufacturesPromise).then(function (results) {
+            manufacturers(results);
+        });
     }
         
     function createFrame(name, canvasName, color) {
