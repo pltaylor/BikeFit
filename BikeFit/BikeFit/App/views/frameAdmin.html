@@ -24,6 +24,7 @@
                     <th>Size</th>
                     <th>Stack</th>
                     <th>Reach</th>
+                    <th>BB Drop</th>
                     <th>Head Tube Length</th>
                     <th>Head Tube Angle</th>
                     <th>Front Center</th>
@@ -42,6 +43,8 @@
                     <td>
                         <input class="input-small" data-bind="value: reach" placeholder="Reach" /></td>
                     <td>
+                        <input class="input-small" data-bind="value: bottomBracketDrop" placeholder="Reach" /></td>
+                    <td>
                         <input class="input-small" data-bind="value: headTubeLength" placeholder="Head Tube Length" /></td>
                     <td>
                         <input class="input-small" data-bind="value: headTubeAngle" placeholder="Head Tube Angle" /></td>
@@ -53,7 +56,7 @@
                         <input class="input-small" data-bind="value: minSeatAngle" placeholder="Min. Seat Angle" /></td>
                     <td>
                         <input class="input-small" data-bind="value: maxSeatAngle" placeholder="Max. Seat Angle" /></td>
-                    <td data-bind="text: wheelSize"></td>
+                    <td><select class="input-small" data-bind="options: $parents[1].wheelSizes(), optionsText: 'name', optionsValue: 'value', value: wheelSize"></select></td>
                 </tr>
             </tbody>
         </table>

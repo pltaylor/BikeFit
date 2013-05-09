@@ -52,6 +52,11 @@
             return true;
         };
 
+        var wheelSizes = ko.observableArray([
+            { name: '700c', value: 'SevenHundred' },
+            { name: '650c', value: 'SixFifty' }
+        ]);
+
         var vm = {
             activate: activate,
             cancel: cancel,
@@ -61,19 +66,13 @@
             manu: manufacturer,
             manufacturers: manufacturers,
             modelsWithSizes: modelsWithSizes,
-            save: save
+            save: save,
+            wheelSizes: wheelSizes
         };
 
         return vm;
 
         //#region Internal Methods
-        //function activate() {
-        //    manufacturers(datacontext.lookups.manufacturers),
-        //    //var promise = Q.all([datacontext.getManufacturers(manufacturers)]);
-        //    logger.log('Frames Admin View Activated', null, 'frames', false);
-        //    return promise;
-        //}
-
         function activate() {
             var manufacturesPromise = datacontext.lookups.manufacturers();
             logger.log('Frames Admin View Activated', null, 'frames', false);

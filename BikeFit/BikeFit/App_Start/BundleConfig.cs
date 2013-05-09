@@ -12,22 +12,15 @@ namespace BikeFit.App_Start
 
             bundles.Add(
               new ScriptBundle("~/scripts/vendor")
-                //.Include("~/scripts/jquery-{version}.js")
-                //.Include("~/scripts/knockout-{version}.debug.js")
-                //.Include("~/scripts/sammy-{version}.js")
                 .Include("~/scripts/toastr.js")
                 .Include("~/scripts/Q.js")
                 .Include("~/scripts/breeze.debug.js")
-                //.Include("~/scripts/bootstrap.js")
                 .Include("~/scripts/moment.js")
               );
 
             bundles.Add(
               new StyleBundle("~/Content/css")
                 .Include("~/Content/ie10mobile.css")
-                //.Include("~/Content/bootstrap.css")
-                //.Include("~/Content/bootstrap-responsive.css")
-                //.Include("~/Content/font-awesome.min.css")
                 .Include("~/Content/durandal.css")
                 .Include("~/Content/toastr.css")
                 .Include("~/Content/styles.css")
