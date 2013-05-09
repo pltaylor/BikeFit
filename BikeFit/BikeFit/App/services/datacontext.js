@@ -107,8 +107,9 @@
         };
         
         var cancelChanges = function () {
-            manager.rejectChanges();
+            var rejectedChanges = manager.rejectChanges();
             log('Canceled changes', null, true);
+            return rejectedChanges;
         };
 
         var saveChanges = function () {

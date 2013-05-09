@@ -14,7 +14,6 @@
             var manufacturerId = this.manu().manufacturerID();
             var result = datacontext.createNewModel(manufacturerId);
             return modelsWithSizes.push(result);
-            //return result;
         };
         
         var hasChanges = ko.computed(function () {
@@ -22,9 +21,13 @@
         });
 
         var cancel = function () {
-            datacontext.cancelChanges();
+            var rejectedChanges = datacontext.cancelChanges();
             for (var i = 0; i < modelsWithSizes().length; i++) {
                 modelsWithSizes()[i].sizes.valueHasMutated();
+            }
+            
+            for (var i = 0; i < rejectedChanges.length; i++) {
+                modelsWithSizes.remove(rejectedChanges[i]);
             }
         };
 
