@@ -17,6 +17,9 @@
 
         var cancel = function () {
             datacontext.cancelChanges();
+            for (var i = 0; i < modelsWithSizes().length; i++) {
+                modelsWithSizes()[i].sizes.valueHasMutated();
+            }
         };
 
         var canSave = ko.computed(function () {

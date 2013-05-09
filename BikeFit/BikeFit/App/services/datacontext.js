@@ -58,8 +58,9 @@
 
                         // add new size function
                         data.results[i].addNewSize = function () {
-                            return createNewSize(this.bikeModelID());
-                            //this.sizes.push(newSize);
+                            var newValue = createNewSize(this.bikeModelID());
+                            this.sizes.valueHasMutated();
+                            return newValue;
                         };
                     }
                     bikeModelsObservable(data.results);
