@@ -8,9 +8,15 @@
 
         manufacturer.subscribe(function (newValue) {
             datacontext.getBikeModelsWithSizes(modelsWithSizes, newValue.manufacturerID());
-            
         });
 
+        var createNewModel = function() {
+            var manufacturerId = this.manu().manufacturerID();
+            var result = datacontext.createNewModel(manufacturerId);
+            return modelsWithSizes.push(result);
+            //return result;
+        };
+        
         var hasChanges = ko.computed(function () {
             return datacontext.hasChanges();
         });
@@ -34,7 +40,18 @@
                 isSaving(false);
             }
         };
-
+        
+        var canCreateNewModel = ko.computed(function() {
+            if (manufacturer() == null) {
+                return false;
+            }
+            var manufacturerId = manufacturer().manufacturerID();
+            if (manufacturerId == '00000000-0000-0000-0000-000000000000') {
+                return false;
+            }
+            return true;
+        });
+        
         var canDeactivate = function () {
             if (hasChanges()) {
                 var title = 'Do you want to leave ?';
@@ -60,8 +77,10 @@
         var vm = {
             activate: activate,
             cancel: cancel,
+            canCreateNewModel: canCreateNewModel,
             canDeactivate: canDeactivate,
             canSave: canSave,
+            createNewModel: createNewModel,
             hasChanges: hasChanges,
             manu: manufacturer,
             manufacturers: manufacturers,

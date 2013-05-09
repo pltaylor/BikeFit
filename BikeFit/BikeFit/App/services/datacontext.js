@@ -8,6 +8,24 @@
         var createNewSize = function (modelId) {
             return manager.createEntity(entityNames.bikeSize, { sizeID: breeze.core.getUuid(), bikeModelID: modelId });
         };
+
+        var createNewModel = function (manufacturerId) {
+            var result = manager.createEntity(entityNames.bikeModel,
+                {
+                    bikeModelID: breeze.core.getUuid(),
+                    manufactuerID: manufacturerId,
+                    manufacturedStartDate: new Date(2000, 1, 1),
+                    manufacturedEndDate: new Date()
+                });
+
+            result.addNewSize = function () {
+                var newValue = createNewSize(this.bikeModelID());
+                this.sizes.valueHasMutated();
+                return newValue;
+            };
+            
+            return result;
+        };
         
         var getManufacturers = function (manufacturerObservable) {
             var query = entityQuery.from('Manufacturers')
@@ -131,6 +149,7 @@
         };
 
         var datacontext = {
+            createNewModel: createNewModel,
             getManufacturers: getManufacturers,
             getBikeModels: getBikeModels,
             getBikeModelsWithSizes: getBikeModelsWithSizes,
