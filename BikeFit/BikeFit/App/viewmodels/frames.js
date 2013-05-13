@@ -48,10 +48,11 @@
         });
 
         var output = {
-            name : name,
+            color: color,
             manufacturer: manufacturer,
             models: models,
             model: model,
+            name : name,
             sizes: sizes,
             size: size
         };

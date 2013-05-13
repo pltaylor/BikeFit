@@ -213,7 +213,7 @@ body
     body > header > h1,
     span.title
     {
-        background: url(/content/images/icon-light-blue-small.png) no-repeat left center;
+        background: url(/Content/images/icon.png) no-repeat left center;
         -moz-background-size: 40px;
         -o-background-size: 40px;
         -webkit-background-size: 40px;
@@ -972,4 +972,9 @@ nav label
         height: auto;
         margin-bottom: 15px;
         padding: 7px 9px;
+    }
+
+    .input-small 
+    {
+        margin-bottom: 0;
     }

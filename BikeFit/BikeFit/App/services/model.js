@@ -30,8 +30,12 @@
             createNullo(entityNames.manufacturer);
 
             function createNullo(entityName, values) {
+                var abbr = entityName;
+                if (entityName == 'Manufacturer') {
+                    abbr = 'Mfg.';
+                }
                 var initialValues = values
-                    || { name: ' Select a ' + entityName };
+                    || { name: ' Select a ' + abbr };
                 return manager.createEntity(entityName, initialValues, unchanged);
             }
 

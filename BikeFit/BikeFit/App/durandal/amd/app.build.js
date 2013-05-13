@@ -7,8 +7,8 @@
   "paths": {
     "text": "durandal/amd/text"
   },
-  "baseUrl": "C:\\Users\\ptaylor\\SkyDrive\\Documents\\BikeFit\\BikeFit\\BikeFit\\App",
-  "mainConfigFile": "C:\\Users\\ptaylor\\SkyDrive\\Documents\\BikeFit\\BikeFit\\BikeFit\\App\\main.js",
+  "baseUrl": "C:\\Users\\ptaylor.CORP\\SkyDrive\\Documents\\BikeFit\\BikeFit\\BikeFit\\App",
+  "mainConfigFile": "C:\\Users\\ptaylor.CORP\\SkyDrive\\Documents\\BikeFit\\BikeFit\\BikeFit\\App\\main.js",
   "include": [
     "config",
     "main-built",
@@ -47,7 +47,7 @@
   "exclude": [],
   "keepBuildDir": true,
   "optimize": "uglify2",
-  "out": "C:\\Users\\ptaylor\\SkyDrive\\Documents\\BikeFit\\BikeFit\\BikeFit\\App\\main-built.js",
+  "out": "C:\\Users\\ptaylor.CORP\\SkyDrive\\Documents\\BikeFit\\BikeFit\\BikeFit\\App\\main-built.js",
   "pragmas": {
     "build": true
   },

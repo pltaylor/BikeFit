@@ -1,6 +1,8 @@
-﻿define(['services/logger',
-        'services/datacontext'],
-    function (logger, datacontext) {
+﻿define(['services/datacontext',
+        'services/logger',
+        'durandal/app'
+        ],
+    function (datacontext, logger, app) {
         var manufacturers = ko.observableArray();
         var manufacturer = ko.observable();
         var isSaving = ko.observable(false);

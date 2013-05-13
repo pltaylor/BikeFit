@@ -43,7 +43,7 @@
   <ItemGroup>
     <Reference Include="Breeze.WebApi, Version=1.2.8.0, Culture=neutral, PublicKeyToken=f6085f1a45e2ac59, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Breeze.WebApi.1.3.2\lib\Breeze.WebApi.dll</HintPath>
+      <HintPath>..\packages\Breeze.WebApi.1.3.3\lib\Breeze.WebApi.dll</HintPath>
     </Reference>
     <Reference Include="DotNetOpenAuth.AspNet">
       <HintPath>..\packages\DotNetOpenAuth.AspNet.4.3.0.13117\lib\net45-full\DotNetOpenAuth.AspNet.dll</HintPath>
@@ -65,7 +65,7 @@
     </Reference>
     <Reference Include="Irony, Version=1.0.0.0, Culture=neutral, PublicKeyToken=ca48ace7223ead47, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Breeze.WebApi.1.3.2\lib\Irony.dll</HintPath>
+      <HintPath>..\packages\Breeze.WebApi.1.3.3\lib\Irony.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.Data.Edm, Version=5.4.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -79,9 +79,12 @@
     <Reference Include="Microsoft.Web.Mvc.FixedDisplayModes">
       <HintPath>..\packages\Microsoft.AspNet.Mvc.FixedDisplayModes.1.0.1\lib\net40\Microsoft.Web.Mvc.FixedDisplayModes.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.Web.WebPages.OAuth, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.OAuth.2.0.20710.0\lib\net40\Microsoft.Web.WebPages.OAuth.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Newtonsoft.Json.5.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\packages\Newtonsoft.Json.5.0.5\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -188,9 +191,11 @@
     <Compile Include="App_Start\HotTowelConfig.cs" />
     <Compile Include="App_Start\HotTowelRouteConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AcountController.cs" />
     <Compile Include="Controllers\BreezeController.cs" />
     <Compile Include="Controllers\HotTowelController.cs" />
     <Compile Include="DataLayer\BikeFitContext.cs" />
+    <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -199,6 +204,7 @@
       <DependentUpon>201304221808448_InitialCreate.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\BikeModel.cs" />
     <Compile Include="Models\BikeSize.cs" />
     <Compile Include="Models\Manufacturer.cs" />
@@ -273,6 +279,7 @@
     <Content Include="Content\font\fontawesome-webfont.ttf" />
     <Content Include="Content\font\fontawesome-webfont.eot" />
     <Content Include="Content\font\FontAwesome.otf" />
+    <Content Include="Content\toastr.less" />
     <None Include="Properties\PublishProfiles\bikefit - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\bikefit - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\PerrysAzure.pubxml" />
@@ -280,6 +287,7 @@
     <None Include="Scripts\breeze.intellisense.js" />
     <Content Include="Scripts\breeze.debug.js" />
     <Content Include="Scripts\breeze.min.js" />
+    <Content Include="Scripts\customKOBindings.js" />
     <Content Include="Scripts\jquery-2.0.0.js" />
     <Content Include="Scripts\jquery-2.0.0.min.js" />
     <Content Include="Scripts\knockout-2.2.1.debug.js" />

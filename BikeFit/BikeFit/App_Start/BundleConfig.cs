@@ -19,6 +19,10 @@ namespace BikeFit.App_Start
               );
 
             bundles.Add(
+                new ScriptBundle("~/scripts/custom")
+                .Include("~/scripts/customKOBindings.js"));
+
+            bundles.Add(
               new StyleBundle("~/Content/css")
                 .Include("~/Content/ie10mobile.css")
                 .Include("~/Content/durandal.css")
