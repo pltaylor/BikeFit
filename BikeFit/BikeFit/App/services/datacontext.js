@@ -45,6 +45,10 @@
         };
         
         var getBikeModels = function (bikeModelsObservable, manufacturerId) {
+            if (manufacturerId == "00000000-0000-0000-0000-000000000000") {
+                bikeModelsObservable('');
+                return true;
+            }
             var query = entityQuery.from('BikeModels').where('manufactuerID', '==', manufacturerId)
                 .orderBy('name');
 
@@ -54,6 +58,14 @@
 
             function querySucceeded(data) {
                 if (bikeModelsObservable) {
+                    var initialValues = {
+                        bikeModelID: breeze.core.getUuid(),
+                        manufactuerID: manufacturerId,
+                        manufacturedStartDate: new Date(2000, 1, 1),
+                        manufacturedEndDate: new Date(),
+                        name: ' Select a Model'
+                    };
+                    createNullo(entityNames.bikeModel, 'Model', initialValues);
                     bikeModelsObservable(data.results);
                 }
                 log('Retrieved [Bike Models] from remote data source',
@@ -99,10 +111,14 @@
 
             function querySucceeded(data) {
                 if (bikeSizesObservable) {
+                    var intialValues = { size: ' Select a Size', sizeID: breeze.core.getUuid(), bikeModelID: modelId };
+                    createNullo(entityNames.bikeSize, 'Size', intialValues);
                     bikeSizesObservable(data.results);
                 }
                 log('Retrieved [Bike Sizes] from remote data source',
                     data, false);
+                
+                
             }
         };
         
@@ -134,6 +150,7 @@
         manager.hasChangesChanged.subscribe(function (eventArgs) {
             hasChanges(eventArgs.hasChanges);
         });
+        
         var primeData = function () {
             var promise = Q.all([getManufacturers()])
                 .then(processLookups);
@@ -191,6 +208,12 @@
         
         function processLookups() {
             model.createNullos(manager);
+        }
+
+        function createNullo(entityName, abbr, values) {
+            var unchanged = breeze.EntityState.Unchanged;
+            var initialValues = values || { name: ' Select a ' + abbr };
+            return manager.createEntity(entityName, initialValues, unchanged);
         }
         //#endregion
 });

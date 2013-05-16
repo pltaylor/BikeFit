@@ -86,7 +86,7 @@
         var resultOrPromise = router.guardRoute(routeInfo, params, instance);
         if (resultOrPromise) {
             if (resultOrPromise.then) {
-                resultOrPromise.then(function(result) {
+                resultOrPromise.then(function (result) {
                     if (result) {
                         if (typeof result == 'string') {
                             redirect(result);
@@ -123,7 +123,7 @@
 
         isNavigating(true);
 
-        system.acquire(next.routeInfo.moduleId).then(function(module) {
+        system.acquire(next.routeInfo.moduleId).then(function (module) {
             next.params.routeInfo = next.routeInfo;
             next.params.router = router;
 
@@ -159,9 +159,11 @@
                 return;
             }
 
+            var routeName = router.convertRouteToName(route);
             routeInfo = {
                 moduleId: router.autoConvertRouteToModuleId(route, params),
-                name: router.convertRouteToName(route)
+                name: routeName,
+                caption: routeName
             };
         }
 
@@ -222,6 +224,7 @@
             setTimeout(function () {
                 isNavigating(false);
                 dequeueRoute();
+                router.onRouteComposed && router.onRouteComposed(router.activeRoute());
             }, 10);
         },
         getActivatableInstance: function (routeInfo, params, module) {
@@ -250,9 +253,9 @@
         },
         onNavigationComplete: function (routeInfo, params, module) {
             if (app.title) {
-                document.title = routeInfo.name + " | " + app.title;
+                document.title = routeInfo.caption + " | " + app.title;
             } else {
-                document.title = routeInfo.name;
+                document.title = routeInfo.caption;
             }
         },
         navigateBack: function () {
@@ -270,13 +273,39 @@
                     window.location.replace(url);
                     break;
                 default:
-                    if (sammy.lookupRoute('get', url)) {
+                    if (sammy.lookupRoute('get', url) && url.indexOf("http") !== 0) {
                         sammy.setLocation(url);
                     } else {
                         window.location.href = url;
                     }
                     break;
             }
+        },
+        navigateToRoute: function (url, data) {
+
+            var newUrl = url;
+            // find the hash using the url with parameters stripped 
+            for (var route in routesByPath) {
+                if (router.stripParameter(routesByPath[route].url) == url) {
+                    newUrl = routesByPath[route].hash;
+                    break;
+                }
+            }
+
+            // if this is an url with parameters, add data.property for these parameters to the url
+            var colonIndex = newUrl.indexOf(':');
+            if (colonIndex > 0) {
+                var paramstring = newUrl.substring(colonIndex - 1, newUrl.length);
+                var params = paramstring.split('/:');
+                newUrl = router.stripParameter(newUrl);
+                for (var i = 0; i < params.length; i++) {
+                    if (params[i]) {
+                        newUrl += '/' + data[params[i]];
+                    }
+                }
+            }
+
+            sammy.setLocation(newUrl);
         },
         replaceLocation: function (url) {
             this.navigateTo(url, 'replace');
@@ -337,6 +366,11 @@
             }
             return configured;
         },
+        deactivate: function () {
+            router.allRoutes.removeAll();
+            router.visibleRoutes.removeAll();
+            sammy && sammy.destroy();
+        },
         activate: function (defaultRoute) {
             return system.defer(function (dfd) {
                 var processedRoute;
@@ -362,14 +396,14 @@
                     return false;
                 };
 
-                sammy.before(null, function(context) {
+                sammy.before(null, function (context) {
                     if (!skipRouteUrl) {
                         return true;
                     } else if (context.path === "/" + skipRouteUrl) {
                         skipRouteUrl = null;
                         return false;
                     } else {
-                        throw new Error("Expected to skip url '" + skipRouteUrl + "', but found url '" + context.path + "'");
+                        system.error(new Error("Expected to skip url '" + skipRouteUrl + "', but found url '" + context.path + "'"));
                     }
                 });
 

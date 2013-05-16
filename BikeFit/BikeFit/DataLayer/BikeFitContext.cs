@@ -6,10 +6,17 @@ namespace BikeFit.DataLayer
 {
     public class BikeFitContext : DbContext 
     {
+        public BikeFitContext()
+            : base("name=DefaultConnection")
+        {
+        }
+
         public DbSet<Manufacturer> Manufacturers { get; set; }
 
         public DbSet<BikeModel> BikeModels { get; set; }
 
         public DbSet<BikeSize> BikeSizes { get; set; }
+
+        public DbSet<UserProfile> UserProfiles { get; set; }
     }
 }

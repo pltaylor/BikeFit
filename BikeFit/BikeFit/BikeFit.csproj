@@ -191,7 +191,7 @@
     <Compile Include="App_Start\HotTowelConfig.cs" />
     <Compile Include="App_Start\HotTowelRouteConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Controllers\AcountController.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BreezeController.cs" />
     <Compile Include="Controllers\HotTowelController.cs" />
     <Compile Include="DataLayer\BikeFitContext.cs" />
@@ -240,15 +240,19 @@
     <Content Include="App\services\model.js" />
     <Content Include="App\viewmodels\frames.js" />
     <Content Include="App\viewmodels\frameAdmin.js" />
-    <Content Include="App\viewmodels\home.js" />
+    <Content Include="App\viewmodels\faq.js" />
     <Content Include="App\viewmodels\login.js" />
+    <Content Include="App\viewmodels\logout.js" />
+    <Content Include="App\viewmodels\register.js" />
     <Content Include="App\viewmodels\shell.js" />
     <Content Include="App\views\frameAdmin.html" />
     <Content Include="App\views\frames.html" />
     <Content Include="App\views\frameSelection.html" />
-    <Content Include="App\views\home.html" />
+    <Content Include="App\views\faq.html" />
     <Content Include="App\views\login.html" />
+    <Content Include="App\views\logout.html" />
     <Content Include="App\views\nav.html" />
+    <Content Include="App\views\register.html" />
     <Content Include="App\views\shell.html" />
     <Content Include="App_Data\BikeFit.DataLayer.BikeFitContext.mdf" />
     <Content Include="App_Data\BikeFit.DataLayer.BikeFitContext_log.ldf">
@@ -260,6 +264,7 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\durandal.css" />
+    <Content Include="Content\font-awesome-ie7.css" />
     <Content Include="Content\font-awesome-ie7.min.css" />
     <Content Include="Content\font-awesome.css" />
     <Content Include="Content\font-awesome.min.css" />
@@ -275,11 +280,11 @@
     <Content Include="Global.asax" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Content\toastr.less" />
     <Content Include="Content\font\fontawesome-webfont.woff" />
     <Content Include="Content\font\fontawesome-webfont.ttf" />
     <Content Include="Content\font\fontawesome-webfont.eot" />
     <Content Include="Content\font\FontAwesome.otf" />
-    <Content Include="Content\toastr.less" />
     <None Include="Properties\PublishProfiles\bikefit - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\bikefit - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\PerrysAzure.pubxml" />
@@ -313,6 +318,10 @@
     <Content Include="Views\HotTowel\index.cshtml" />
     <Content Include="Views\HotTowel\_splash.cshtml" />
     <Content Include="Scripts\jquery-2.0.0.min.map" />
+    <Content Include="Views\Account\ExternalLoginConfirmation.cshtml" />
+    <Content Include="Views\Account\ExternalLoginFailure.cshtml" />
+    <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
+    <Content Include="Views\Account\_RemoveExternalLoginsPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201304221808448_InitialCreate.resx">

@@ -1,5 +1,5 @@
 ﻿<section>
-    <form class="form-signin">
+    <div class="form-signin">
         <h2 class="form-signin-heading">Please sign in</h2>
         <input type="text" class="input-block-level" placeholder="Login" data-bind="value: userName">
         <input type="password" class="input-block-level" placeholder="Password" data-bind="value: password">
@@ -7,6 +7,7 @@
             <input type="checkbox" value="remember-me" data-bind="checked: rememberMe">
             Remember me
         </label>
-        <button class="btn btn-large btn-primary" type="submit">Sign in</button>
-    </form>
+        <button class="btn btn-large btn-primary" data-bind="click: logIn">Sign in</button>
+        <!--<p>First time here? <a data-bind="click: register">Sign up</a></p>-->
+    </div>
 </section>

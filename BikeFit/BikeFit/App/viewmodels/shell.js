@@ -11,9 +11,12 @@
             });
         });
 
+        var isLoggedIn = ko.observable(false);
+        
         var shell = {
             activate: activate,
             adminRoutes: adminRoutes,
+            isAdmin: isLoggedIn,
             goToAdmin: goToAdmin,
             router: router
         };
@@ -30,7 +33,7 @@
         function boot() {
             router.map(config.routes);
             log('My Tri Bike Fit Loaded!', null, false);
-            return router.activate('home');
+            return router.activate('frames');
         }
         
         function goToAdmin(item) {

@@ -26,7 +26,7 @@
 
         function createNullos(manager) {
             var unchanged = breeze.EntityState.Unchanged;
-
+            
             createNullo(entityNames.manufacturer);
 
             function createNullo(entityName, values) {
@@ -47,6 +47,30 @@
 
         function bikeModelInitializer(bikeModel) {
             bikeModel.sizes = ko.observableArray();
+
+            bikeModel.manufacturedStartDateFormatted = ko.computed({
+                read: function () {
+                    var manufacturedStartDate = bikeModel.manufacturedStartDate();
+                    var calendar = moment(manufacturedStartDate).calendar();
+                    return calendar;
+                },
+                write: function (value) {
+                    var time = moment(value, "MM-DD-YYYY").toJSON();
+                    bikeModel.manufacturedStartDate(time);
+                },
+                owner: bikeModel
+            });
+            
+            bikeModel.manufacturedEndDateFormatted = ko.computed({
+                read: function () {
+                    return moment(bikeModel.manufacturedEndDate()).calendar();
+                },
+                write: function (value) {
+                    var time = moment(value, "MM-DD-YYYY").toJSON();
+                    bikeModel.manufacturedEndDate(time);
+                },
+                owner: bikeModel
+            });
         }
 
         function bikeSizeInitializer(bikeSize) {

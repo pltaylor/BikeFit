@@ -1,14 +1,14 @@
 ﻿define(['services/logger'], function (logger) {
     var vm = {
         activate: activate,
-        title: 'Home View'
+        title: 'Frequently Asked Questions'
     };
 
     return vm;
 
     //#region Internal Methods
     function activate() {
-        logger.log('Home View Activated', null, 'home', true);
+        logger.log('FAQ Activated', null, 'home', false);
         return true;
     }
     //#endregion

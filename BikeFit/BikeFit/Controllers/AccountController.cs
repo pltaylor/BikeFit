@@ -22,40 +22,38 @@ namespace BikeFit.Controllers
     {
         //
         // POST: /Account/Login
-
-        [HttpPost]
         [AllowAnonymous]
-        public JsonResult Login(LoginModel model, string returnUrl)
+        [HttpPost]
+        public JsonResult Login(LoginModel model)
         {
-            if (ModelState.IsValid && WebSecurity.Login(model.UserName, model.Password, persistCookie: model.RememberMe))
+            if (ModelState.IsValid)
             {
-                return Json(returnUrl);
+                if (WebSecurity.Login(model.UserName, model.Password, persistCookie: model.RememberMe))
+                {
+                    FormsAuthentication.SetAuthCookie(model.UserName, model.RememberMe);
+                    return Json(true);
+                }
             }
 
-            // If we got this far, something failed, redisplay form
-            ModelState.AddModelError("", "The user name or password provided is incorrect.");
-            return Json(model);
+            // If we got this far, something failed
+            return Json(false);
         }
 
         //
         // POST: /Account/LogOff
-
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public JsonResult LogOff()
+        public ActionResult LogOff()
         {
             WebSecurity.Logout();
 
-            return Json(true);
+            return RedirectToAction("Index", "HotTowel");
         }
-        
+
         //
         // POST: /Account/Register
-
         [HttpPost]
         [AllowAnonymous]
-        [ValidateAntiForgeryToken]
-        public JsonResult Register(RegisterModel model)
+        public ActionResult Register(RegisterModel model)
         {
             if (ModelState.IsValid)
             {
@@ -64,16 +62,38 @@ namespace BikeFit.Controllers
                 {
                     WebSecurity.CreateUserAndAccount(model.UserName, model.Password);
                     WebSecurity.Login(model.UserName, model.Password);
-                    return Json(true);
+
+                    InitiateDatabaseForNewUser(model.UserName);
+
+                    FormsAuthentication.SetAuthCookie(model.UserName, createPersistentCookie: false);
+                    return Json(new { success = true });
                 }
-                catch (MembershipCreateUserException e)
+                catch (MembershipCreateUserException)
                 {
-                    ModelState.AddModelError("", ErrorCodeToString(e.StatusCode));
+                    // If we got this far, something failed
+                    return Json(new { success = false });
                 }
             }
+            return Json(new { success = false });
+        }
 
-            // If we got this far, something failed, redisplay form
-            return Json(false);
+        /// <summary>
+        /// Initiate a new todo list for new user
+        /// </summary>
+        /// <param name="userName"></param>
+        private static void InitiateDatabaseForNewUser(string userName)
+        {
+            //TodoItemContext db = new TodoItemContext();
+            //TodoList todoList = new TodoList();
+            //todoList.UserId = userName;
+            //todoList.Title = "My Todo List #1";
+            //todoList.Todos = new List<TodoItem>();
+            //db.TodoLists.Add(todoList);
+            //db.SaveChanges();
+
+            //todoList.Todos.Add(new TodoItem() { Title = "Todo item #1", TodoListId = todoList.TodoListId, IsDone = false });
+            //todoList.Todos.Add(new TodoItem() { Title = "Todo item #2", TodoListId = todoList.TodoListId, IsDone = false });
+            //db.SaveChanges();
         }
 
         //
@@ -104,7 +124,22 @@ namespace BikeFit.Controllers
 
             return RedirectToAction("Manage", new { Message = message });
         }
-        
+
+        //
+        // GET: /Account/Manage
+
+        public JsonResult Manage(ManageMessageId? message)
+        {
+            ViewBag.StatusMessage =
+                message == ManageMessageId.ChangePasswordSuccess ? "Your password has been changed."
+                : message == ManageMessageId.SetPasswordSuccess ? "Your password has been set."
+                : message == ManageMessageId.RemoveLoginSuccess ? "The external login was removed."
+                : "";
+            ViewBag.HasLocalPassword = OAuthWebSecurity.HasLocalAccount(WebSecurity.GetUserId(User.Identity.Name));
+            ViewBag.ReturnUrl = Url.Action("Manage");
+            return Json(true);
+        }
+
         //
         // POST: /Account/Manage
 
@@ -132,7 +167,7 @@ namespace BikeFit.Controllers
 
                     if (changePasswordSucceeded)
                     {
-                        return Json(new { Message = ManageMessageId.ChangePasswordSuccess });
+                        return Json("ChangePasswordSuccess");
                     }
                     else
                     {
@@ -155,62 +190,62 @@ namespace BikeFit.Controllers
                     try
                     {
                         WebSecurity.CreateAccount(User.Identity.Name, model.NewPassword);
-                        return Json(new { Message = ManageMessageId.SetPasswordSuccess });
+                        return Json("SetPasswordSuccess");
                     }
-                    catch (Exception)
+                    catch (Exception e)
                     {
-                        ModelState.AddModelError("", String.Format("Unable to create local account. An account with the name \"{0}\" may already exist.", User.Identity.Name));
+                        ModelState.AddModelError("", e);
                     }
                 }
             }
 
             // If we got this far, something failed, redisplay form
-            return Json(false);
+            return Json(model);
         }
 
         //
         // POST: /Account/ExternalLogin
 
-        //[HttpPost]
-        //[AllowAnonymous]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult ExternalLogin(string provider, string returnUrl)
-        //{
-        //    return new ExternalLoginResult(provider, Url.Action("ExternalLoginCallback", new { ReturnUrl = returnUrl }));
-        //}
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public ActionResult ExternalLogin(string provider, string returnUrl)
+        {
+            return new ExternalLoginResult(provider, Url.Action("ExternalLoginCallback", new { ReturnUrl = returnUrl }));
+        }
 
         //
         // GET: /Account/ExternalLoginCallback
 
-        //[AllowAnonymous]
-        //public ActionResult ExternalLoginCallback(string returnUrl)
-        //{
-        //    AuthenticationResult result = OAuthWebSecurity.VerifyAuthentication(Url.Action("ExternalLoginCallback", new { ReturnUrl = returnUrl }));
-        //    if (!result.IsSuccessful)
-        //    {
-        //        return RedirectToAction("ExternalLoginFailure");
-        //    }
+        [AllowAnonymous]
+        public ActionResult ExternalLoginCallback(string returnUrl)
+        {
+            AuthenticationResult result = OAuthWebSecurity.VerifyAuthentication(Url.Action("ExternalLoginCallback", new { ReturnUrl = returnUrl }));
+            if (!result.IsSuccessful)
+            {
+                return RedirectToAction("ExternalLoginFailure");
+            }
 
-        //    if (OAuthWebSecurity.Login(result.Provider, result.ProviderUserId, createPersistentCookie: false))
-        //    {
-        //        return Json(returnUrl);
-        //    }
+            if (OAuthWebSecurity.Login(result.Provider, result.ProviderUserId, createPersistentCookie: false))
+            {
+                return RedirectToLocal(returnUrl);
+            }
 
-        //    if (User.Identity.IsAuthenticated)
-        //    {
-        //        // If the current user is logged in add the new account
-        //        OAuthWebSecurity.CreateOrUpdateAccount(result.Provider, result.ProviderUserId, User.Identity.Name);
-        //        return Json(returnUrl);
-        //    }
-        //    else
-        //    {
-        //        // User is new, ask for their desired membership name
-        //        string loginData = OAuthWebSecurity.SerializeProviderUserId(result.Provider, result.ProviderUserId);
-        //        ViewBag.ProviderDisplayName = OAuthWebSecurity.GetOAuthClientData(result.Provider).DisplayName;
-        //        ViewBag.ReturnUrl = returnUrl;
-        //        return Json(new RegisterExternalLoginModel { UserName = result.UserName, ExternalLoginData = loginData });
-        //    }
-        //}
+            if (User.Identity.IsAuthenticated)
+            {
+                // If the current user is logged in add the new account
+                OAuthWebSecurity.CreateOrUpdateAccount(result.Provider, result.ProviderUserId, User.Identity.Name);
+                return RedirectToLocal(returnUrl);
+            }
+            else
+            {
+                // User is new, ask for their desired membership name
+                string loginData = OAuthWebSecurity.SerializeProviderUserId(result.Provider, result.ProviderUserId);
+                ViewBag.ProviderDisplayName = OAuthWebSecurity.GetOAuthClientData(result.Provider).DisplayName;
+                ViewBag.ReturnUrl = returnUrl;
+                return View("ExternalLoginConfirmation", new RegisterExternalLoginModel { UserName = result.UserName, ExternalLoginData = loginData });
+            }
+        }
 
         //
         // POST: /Account/ExternalLoginConfirmation
@@ -241,10 +276,12 @@ namespace BikeFit.Controllers
                         db.UserProfiles.Add(new UserProfile { UserName = model.UserName });
                         db.SaveChanges();
 
+                        InitiateDatabaseForNewUser(model.UserName);
+
                         OAuthWebSecurity.CreateOrUpdateAccount(provider, providerUserId, model.UserName);
                         OAuthWebSecurity.Login(provider, providerUserId, createPersistentCookie: false);
 
-                        return Json(returnUrl);
+                        return RedirectToLocal(returnUrl);
                     }
                     else
                     {
@@ -255,59 +292,59 @@ namespace BikeFit.Controllers
 
             ViewBag.ProviderDisplayName = OAuthWebSecurity.GetOAuthClientData(provider).DisplayName;
             ViewBag.ReturnUrl = returnUrl;
-            return Json(model);
+            return View(model);
         }
 
         //
         // GET: /Account/ExternalLoginFailure
 
-        //[AllowAnonymous]
-        //public ActionResult ExternalLoginFailure()
-        //{
-        //    return Json(false);
-        //}
+        [AllowAnonymous]
+        public ActionResult ExternalLoginFailure()
+        {
+            return View();
+        }
 
-        //[AllowAnonymous]
-        //[ChildActionOnly]
-        //public ActionResult ExternalLoginsList(string returnUrl)
-        //{
-        //    ViewBag.ReturnUrl = returnUrl;
-        //    return PartialView("_ExternalLoginsListPartial", OAuthWebSecurity.RegisteredClientData);
-        //}
+        [AllowAnonymous]
+        [ChildActionOnly]
+        public ActionResult ExternalLoginsList(string returnUrl)
+        {
+            ViewBag.ReturnUrl = returnUrl;
+            return PartialView("_ExternalLoginsListPartial", OAuthWebSecurity.RegisteredClientData);
+        }
 
-        //[ChildActionOnly]
-        //public ActionResult RemoveExternalLogins()
-        //{
-        //    ICollection<OAuthAccount> accounts = OAuthWebSecurity.GetAccountsFromUserName(User.Identity.Name);
-        //    List<ExternalLogin> externalLogins = new List<ExternalLogin>();
-        //    foreach (OAuthAccount account in accounts)
-        //    {
-        //        AuthenticationClientData clientData = OAuthWebSecurity.GetOAuthClientData(account.Provider);
+        [ChildActionOnly]
+        public ActionResult RemoveExternalLogins()
+        {
+            ICollection<OAuthAccount> accounts = OAuthWebSecurity.GetAccountsFromUserName(User.Identity.Name);
+            List<ExternalLogin> externalLogins = new List<ExternalLogin>();
+            foreach (OAuthAccount account in accounts)
+            {
+                AuthenticationClientData clientData = OAuthWebSecurity.GetOAuthClientData(account.Provider);
 
-        //        externalLogins.Add(new ExternalLogin
-        //        {
-        //            Provider = account.Provider,
-        //            ProviderDisplayName = clientData.DisplayName,
-        //            ProviderUserId = account.ProviderUserId,
-        //        });
-        //    }
+                externalLogins.Add(new ExternalLogin
+                {
+                    Provider = account.Provider,
+                    ProviderDisplayName = clientData.DisplayName,
+                    ProviderUserId = account.ProviderUserId,
+                });
+            }
 
-        //    ViewBag.ShowRemoveButton = externalLogins.Count > 1 || OAuthWebSecurity.HasLocalAccount(WebSecurity.GetUserId(User.Identity.Name));
-        //    return PartialView("_RemoveExternalLoginsPartial", externalLogins);
-        //}
+            ViewBag.ShowRemoveButton = externalLogins.Count > 1 || OAuthWebSecurity.HasLocalAccount(WebSecurity.GetUserId(User.Identity.Name));
+            return PartialView("_RemoveExternalLoginsPartial", externalLogins);
+        }
 
         #region Helpers
-        //private ActionResult RedirectToLocal(string returnUrl)
-        //{
-        //    if (Url.IsLocalUrl(returnUrl))
-        //    {
-        //        return Redirect(returnUrl);
-        //    }
-        //    else
-        //    {
-        //        return RedirectToAction("Index", "Home");
-        //    }
-        //}
+        private ActionResult RedirectToLocal(string returnUrl)
+        {
+            if (Url.IsLocalUrl(returnUrl))
+            {
+                return Redirect(returnUrl);
+            }
+            else
+            {
+                return RedirectToAction("Index", "HotTowel");
+            }
+        }
 
         public enum ManageMessageId
         {
@@ -331,6 +368,11 @@ namespace BikeFit.Controllers
             {
                 OAuthWebSecurity.RequestAuthentication(Provider, ReturnUrl);
             }
+        }
+
+        private IEnumerable<string> GetErrorsFromModelState()
+        {
+            return ModelState.SelectMany(x => x.Value.Errors.Select(error => error.ErrorMessage));
         }
 
         private static string ErrorCodeToString(MembershipCreateStatus createStatus)

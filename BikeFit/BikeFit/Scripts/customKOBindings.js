@@ -29,3 +29,11 @@ var parseJsonDateString = function (value) {
     }
     return value;
 };
+
+ko.bindingHandlers.moment = {
+    update: function (element, valueAccessor) {
+        var value = valueAccessor();
+        var formattedValue = ko.utils.unwrapObservable(value).format('LLLL');
+        $(element).text(formattedValue);
+    }
+};
