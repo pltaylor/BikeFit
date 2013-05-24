@@ -1,9 +1,55 @@
-﻿<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-    <title></title>
-</head>
-<body>
-
-</body>
-</html>
+﻿<section>
+    <h2 class="page-title" data-bind="text: title"></h2>
+    <canvas id="bike" width="500" height="250" class="frame-canvas">
+        <p>Your browser doesn't support canvas.</p>
+    </canvas>
+    <div class="row-fluid" style="margin-top: 215px;">
+        <div class="span12" data-bind="with: frame">
+            <div class="form-inline">
+                <label>Frame:</label>
+                <label class="control-label" for="manufacturer">Manufacturer:</label>
+                <select class="input-medium" id="manufacturer" data-bind="options: $parent.manufacturers, optionsText: 'name', value: manufacturer"></select>
+                <label class="control-label" for="model">Model:</label>
+                <select class="input-medium" id="model" data-bind="options: models, optionsText: 'name', value: model"></select>
+                <label class="control-label" for="size">Size:</label>
+                <select class="input-medium" id="size" data-bind="options: sizes, optionsText: 'size', value: size"></select>
+            </div>
+            <div class="form-inline">
+                <label>Headset Spacers:</label>
+            </div>
+            <div class="form-inline">
+                <label>Aero Bar Information:</label>
+            </div>
+            <div data-bind="with: size">
+                <h3 class="text-center">Calculated Geometry</h3>
+                    <dl class="dl-horizontal">
+                        <dt>Stack:</dt>
+                        <dd data-bind="text: stackFormatted"></dd>
+                        <dt>Reach:</dt>
+                        <dd data-bind="text: reachFormatted"></dd>
+                    </dl>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- <div data-bind="with: size">
+                    <h3 class="text-center">Geometry</h3>
+                    <dl class="dl-horizontal">
+                        <dt>Stack:</dt>
+                        <dd data-bind="text: stackFormatted"></dd>
+                        <dt>Reach:</dt>
+                        <dd data-bind="text: reachFormatted"></dd>
+                        <dt>Front Center:</dt>
+                        <dd data-bind="text: frontCenterFormatted"></dd>
+                        <dt>Rear Center:</dt>
+                        <dd data-bind="text: rearCenterFormatted"></dd>
+                        <dt>Head Tube:</dt>
+                        <dd data-bind="text: headTubeLengthFormatted"></dd>
+                        <dt>Min Seat Angle:</dt>
+                        <dd data-bind="text: minSeatAngleFormatted"></dd>
+                        <dt>Min Seat Angle:</dt>
+                        <dd data-bind="text: maxSeatAngleFormatted"></dd>
+                        <dt>Wheel Size:</dt>
+                        <dd data-bind="text: wheelSizeFormatted"></dd>
+                    </dl>
+                </div>-->
