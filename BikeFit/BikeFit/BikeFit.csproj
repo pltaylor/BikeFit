@@ -245,6 +245,7 @@
     <Content Include="App\viewmodels\frames.js" />
     <Content Include="App\viewmodels\frameAdmin.js" />
     <Content Include="App\viewmodels\faq.js" />
+    <Content Include="App\viewmodels\fullBike.js" />
     <Content Include="App\viewmodels\login.js" />
     <Content Include="App\viewmodels\logout.js" />
     <Content Include="App\viewmodels\register.js" />
@@ -253,6 +254,7 @@
     <Content Include="App\views\frames.html" />
     <Content Include="App\views\frameSelection.html" />
     <Content Include="App\views\faq.html" />
+    <Content Include="App\views\fullBike.html" />
     <Content Include="App\views\login.html" />
     <Content Include="App\views\logout.html" />
     <Content Include="App\views\nav.html" />

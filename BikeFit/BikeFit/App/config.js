@@ -19,6 +19,12 @@
         visible: true,
         caption: 'Frames'
     }, {
+        url: 'fullBike',
+        moduleId: 'viewmodels/fullBike',
+        name: 'Full Bike',
+        visible: true,
+        caption: 'Full Bike'
+    }, {
         url: 'faq',
         moduleId: 'viewmodels/faq',
         name: 'FAQ',
