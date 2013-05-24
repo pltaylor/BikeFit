@@ -3,9 +3,9 @@
     function (logger, datacontext) {
     var manufacturers = ko.observableArray();
 
-    var frame1 = createFrame('Frame 1', 'bike1', 'orange'); 
+    var frame1 = createFrame('Frame 1', 'bike1', 'blue'); 
     var frame2 = createFrame('Frame 2', 'bike2', 'green'); 
-    var frame3 = createFrame('Frame 3', 'bike3', 'purple'); 
+    var frame3 = createFrame('Frame 3', 'bike3', 'gray'); 
 
     var vm = {
         activate: activate,
