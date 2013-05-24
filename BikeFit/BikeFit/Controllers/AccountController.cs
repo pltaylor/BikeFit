@@ -46,7 +46,7 @@ namespace BikeFit.Controllers
         {
             WebSecurity.Logout();
 
-            return RedirectToAction("Index", "HotTowel");
+            return Json(true);
         }
 
         //
@@ -98,7 +98,6 @@ namespace BikeFit.Controllers
 
         //
         // POST: /Account/Disassociate
-
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Disassociate(string provider, string providerUserId)
@@ -127,7 +126,6 @@ namespace BikeFit.Controllers
 
         //
         // GET: /Account/Manage
-
         public JsonResult Manage(ManageMessageId? message)
         {
             ViewBag.StatusMessage =
@@ -142,7 +140,6 @@ namespace BikeFit.Controllers
 
         //
         // POST: /Account/Manage
-
         [HttpPost]
         [ValidateAntiForgeryToken]
         public JsonResult Manage(LocalPasswordModel model)
@@ -205,7 +202,6 @@ namespace BikeFit.Controllers
 
         //
         // POST: /Account/ExternalLogin
-
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
@@ -216,7 +212,6 @@ namespace BikeFit.Controllers
 
         //
         // GET: /Account/ExternalLoginCallback
-
         [AllowAnonymous]
         public ActionResult ExternalLoginCallback(string returnUrl)
         {
@@ -249,7 +244,6 @@ namespace BikeFit.Controllers
 
         //
         // POST: /Account/ExternalLoginConfirmation
-
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
@@ -297,7 +291,6 @@ namespace BikeFit.Controllers
 
         //
         // GET: /Account/ExternalLoginFailure
-
         [AllowAnonymous]
         public ActionResult ExternalLoginFailure()
         {
