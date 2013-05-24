@@ -19,19 +19,30 @@
             isAdmin: isLoggedIn,
             goToAdmin: goToAdmin,
             router: router
-        };
+        };  
         
         return shell;
 
         //#region Internal Methods
         function activate() {
             return datacontext.primeData()
+                .then(checkLogin)
                 .then(boot)
                 .fail(failedInitialization);
         }
 
+        function checkLogin() {
+            return $.post("/Account/IsLoggedIn")
+                .done(function (recievedData) {
+                    if (recievedData == true) {
+                        return router.map(config.routesLoggedIn);
+                    } else {
+                        return router.map(config.routes);
+                    }
+                });
+        }
+        
         function boot() {
-            router.map(config.routes);
             log('My Tri Bike Fit Loaded!', null, false);
             return router.activate('frames');
         }

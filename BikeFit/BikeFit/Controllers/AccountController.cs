@@ -20,6 +20,17 @@ namespace BikeFit.Controllers
     [InitializeSimpleMembership]
     public class AccountController : Controller
     {
+        [AllowAnonymous]
+        [HttpPost]
+        public JsonResult IsLoggedIn()
+        {
+            if (User.Identity.IsAuthenticated)
+            {
+                return Json(true);
+            }
+            return Json(false);
+        }
+
         //
         // POST: /Account/Login
         [AllowAnonymous]
