@@ -28,8 +28,8 @@
                 modelsWithSizes()[i].sizes.valueHasMutated();
             }
             
-            for (var i = 0; i < rejectedChanges.length; i++) {
-                modelsWithSizes.remove(rejectedChanges[i]);
+            for (var j = 0; j < rejectedChanges.length; j++) {
+                modelsWithSizes.remove(rejectedChanges[j]);
             }
         };
 
@@ -98,11 +98,10 @@
 
         //#region Internal Methods
         function activate() {
-            var manufacturesPromise = datacontext.getAllManufacturers(manufacturers);
             logger.log('Frames Admin View Activated', null, 'frames', false);
 
-            return $.when(manufacturesPromise).then(function (results) {
-                manufacturers(results);
+            return datacontext.getAllManufacturers(manufacturers).then(function() {
+                datacontext.getBikeModelsWithSizes(modelsWithSizes, manufacturers()[0].manufacturerID());
             });
         }
 

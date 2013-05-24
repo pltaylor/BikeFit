@@ -39,7 +39,7 @@
                 if (manufacturerObservable) {
                     manufacturerObservable(data.results);
                 }
-                log('Retrieved [Manufacturer] from remote data source',
+                log('Retrieved [All Manufacturer] from remote data source',
                     data, false);
             }
         };

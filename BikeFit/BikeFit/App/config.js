@@ -30,12 +30,6 @@
         name: 'Log In',
         visible: true,
         caption: 'Log In'
-    }, {
-        url: 'frameAdmin',
-        moduleId: 'viewmodels/frameAdmin',
-        name: 'Frame Admin',
-        visible: true,
-        caption: '<i class="icon-plus"></i> Frame Admin'
     }];
     
     var routesLoggedIn = [{
