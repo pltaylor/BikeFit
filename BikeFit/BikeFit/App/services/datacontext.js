@@ -27,8 +27,25 @@
             return result;
         };
         
-        var getManufacturers = function (manufacturerObservable) {
+        var getAllManufacturers = function (manufacturerObservable) {
             var query = entityQuery.from('Manufacturers')
+                .orderBy('name');
+
+            return manager.executeQuery(query)
+                .then(querySucceeded)
+                .fail(queryFailed);
+
+            function querySucceeded(data) {
+                if (manufacturerObservable) {
+                    manufacturerObservable(data.results);
+                }
+                log('Retrieved [Manufacturer] from remote data source',
+                    data, false);
+            }
+        };
+        
+        var getManufacturers = function (manufacturerObservable) {
+            var query = entityQuery.from('Manufacturers').where('isActive', '==', 'true')
                 .orderBy('name');
 
             return manager.executeQuery(query)
@@ -168,6 +185,7 @@
 
         var datacontext = {
             createNewModel: createNewModel,
+            getAllManufacturers: getAllManufacturers,
             getManufacturers: getManufacturers,
             getBikeModels: getBikeModels,
             getBikeModelsWithSizes: getBikeModelsWithSizes,

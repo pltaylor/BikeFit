@@ -18,6 +18,8 @@ namespace BikeFit.Models
 
         public string Name { get; set; }
 
+        public bool IsActive { get; set; }
+
         public virtual ICollection<BikeModel> Models
         {
             get

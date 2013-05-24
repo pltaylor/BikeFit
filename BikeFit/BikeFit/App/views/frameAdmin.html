@@ -8,6 +8,7 @@
             </div>
         </div>
     </form>
+    <p>Manufacturer Is Active: <input type="checkbox" data-bind="checked: manu().isActive" /></p>
     <div class="button-bar">
         <button class="btn btn-info" data-bind="click: createNewModel, enable: canCreateNewModel"><i class="icon-plus"></i> Create New Model</button>
         <button class="btn btn-info" data-bind="click: cancel, enable: canSave"><i class="icon-undo"></i> Cancel</button>

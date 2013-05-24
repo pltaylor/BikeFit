@@ -203,6 +203,10 @@
     <Compile Include="Migrations\201304221808448_InitialCreate.Designer.cs">
       <DependentUpon>201304221808448_InitialCreate.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201305241404393_AddManufacturerIsActive.cs" />
+    <Compile Include="Migrations\201305241404393_AddManufacturerIsActive.Designer.cs">
+      <DependentUpon>201305241404393_AddManufacturerIsActive.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\BikeModel.cs" />
@@ -326,6 +330,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201304221808448_InitialCreate.resx">
       <DependentUpon>201304221808448_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201305241404393_AddManufacturerIsActive.resx">
+      <DependentUpon>201305241404393_AddManufacturerIsActive.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

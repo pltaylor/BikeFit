@@ -98,7 +98,7 @@
 
         //#region Internal Methods
         function activate() {
-            var manufacturesPromise = datacontext.lookups.manufacturers();
+            var manufacturesPromise = datacontext.getAllManufacturers(manufacturers);
             logger.log('Frames Admin View Activated', null, 'frames', false);
 
             return $.when(manufacturesPromise).then(function (results) {

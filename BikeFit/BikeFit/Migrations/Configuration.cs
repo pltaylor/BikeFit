@@ -47,43 +47,43 @@ namespace BikeFit.Migrations
 
             //context.SaveChanges();
 
-            context.BikeSizes.AddOrUpdate(
-                p => p.Size,
-                new BikeSize
-                {
-                    BikeModel = context.BikeModels.First(p => p.Name == "P2C"),
-                    SizeID = new Guid("DED67998-037C-436C-9E3D-A5EC695424F7"),
-                    Size = "51",
-                    WheelSize = WheelSize.SevenHundred,
-                    HeadTubeAngle = 72.5,
-                    BottomBracketDrop = 60,
-                    HeadTubeLength = 90,
-                    FrontCenter = 586,
-                    RearCenter = 380,
-                    MinSeatAngle = 76,
-                    MaxSeatAngle = 78,
-                    Stack = 482,
-                    Reach = 405
-                },
-                new BikeSize
-                {
-                    BikeModel = context.BikeModels.First(p => p.Name == "P2C"),
-                    SizeID = new Guid("D912436A-F0D7-4402-AE57-4BD01BF83DD2"),
-                    Size = "54",
-                    WheelSize = WheelSize.SevenHundred,
-                    HeadTubeAngle = 72.5,
-                    BottomBracketDrop = 60,
-                    HeadTubeLength = 121,
-                    FrontCenter = 609,
-                    RearCenter = 380,
-                    MinSeatAngle = 76,
-                    MaxSeatAngle = 78,
-                    Stack = 512,
-                    Reach = 418
-                }
-                );
+            //context.BikeSizes.AddOrUpdate(
+            //    p => p.Size,
+            //    new BikeSize
+            //    {
+            //        BikeModel = context.BikeModels.First(p => p.Name == "P2C"),
+            //        SizeID = new Guid("DED67998-037C-436C-9E3D-A5EC695424F7"),
+            //        Size = "51",
+            //        WheelSize = WheelSize.SevenHundred,
+            //        HeadTubeAngle = 72.5,
+            //        BottomBracketDrop = 60,
+            //        HeadTubeLength = 90,
+            //        FrontCenter = 586,
+            //        RearCenter = 380,
+            //        MinSeatAngle = 76,
+            //        MaxSeatAngle = 78,
+            //        Stack = 482,
+            //        Reach = 405
+            //    },
+            //    new BikeSize
+            //    {
+            //        BikeModel = context.BikeModels.First(p => p.Name == "P2C"),
+            //        SizeID = new Guid("D912436A-F0D7-4402-AE57-4BD01BF83DD2"),
+            //        Size = "54",
+            //        WheelSize = WheelSize.SevenHundred,
+            //        HeadTubeAngle = 72.5,
+            //        BottomBracketDrop = 60,
+            //        HeadTubeLength = 121,
+            //        FrontCenter = 609,
+            //        RearCenter = 380,
+            //        MinSeatAngle = 76,
+            //        MaxSeatAngle = 78,
+            //        Stack = 512,
+            //        Reach = 418
+            //    }
+            //    );
 
-            context.SaveChanges();
+            //context.SaveChanges();
         }
     }
 }
