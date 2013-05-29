@@ -15,12 +15,7 @@ namespace BikeFit.App_Start
                 .Include("~/scripts/toastr.js")
                 .Include("~/scripts/Q.js")
                 .Include("~/scripts/breeze.debug.js")
-                .Include("~/scripts/moment.js")
               );
-
-            bundles.Add(
-                new ScriptBundle("~/scripts/custom")
-                .Include("~/scripts/customKOBindings.js"));
 
             bundles.Add(
               new StyleBundle("~/Content/css")

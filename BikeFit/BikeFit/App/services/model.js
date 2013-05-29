@@ -48,7 +48,8 @@
         function bikeModelInitializer(bikeModel) {
             bikeModel.sizes = ko.observableArray();
 
-            bikeModel.manufacturedStartDateFormatted = ko.computed({
+            bikeModel.manufacturedStart
+            Formatted = ko.computed({
                 read: function () {
                     var manufacturedStartDate = bikeModel.manufacturedStartDate();
                     var calendar = moment(manufacturedStartDate).calendar();
@@ -175,6 +176,70 @@
 
             bikeSize.maxSeatAngleFormatted = ko.computed(function () {
                 return bikeSize.maxSeatAngle() + '°';
+            });
+
+            bikeSize.headSetTopCap = ko.observable(0);
+
+            bikeSize.steeringSpacers = ko.observable(10);
+
+            bikeSize.stemThickness = ko.observable(34);
+
+            bikeSize.stemAngle = ko.observable(0);
+
+            bikeSize.stemLength = ko.observable(90);
+
+            bikeSize.aeroBarSpacers = ko.observable(0);
+
+            bikeSize.armPadSpacers = ko.observable(0);
+
+            bikeSize.armPadOffset = ko.observable(0);
+
+            bikeSize.stemSteeringCenterXLocation = ko.computed(function() {
+                var totalHeight = parseFloat(bikeSize.headSetTopCap()) + parseFloat(bikeSize.steeringSpacers()) + parseFloat(bikeSize.stemThickness()) / 2;
+                var xDelta = Math.sin((90 - bikeSize.headTubeAngle()) * (Math.PI / 180)) * (totalHeight * config.scalingFactor);
+                return bikeSize.headTubeTopXloc() - xDelta;
+            });
+            
+            bikeSize.stemSteeringCenterYLocation = ko.computed(function () {
+                var totalHeight = parseFloat(bikeSize.headSetTopCap()) + parseFloat(bikeSize.steeringSpacers()) + parseFloat(bikeSize.stemThickness()) / 2;
+                var yDelta = Math.cos((90 - bikeSize.headTubeAngle()) * (Math.PI / 180)) * (totalHeight * config.scalingFactor);
+                return bikeSize.headTubeTopYloc() - yDelta;
+            });
+
+            bikeSize.stemEndCenterXLocation = ko.computed(function() {
+                var angle = (bikeSize.stemAngle()) - bikeSize.headTubeAngle();
+                var xDelta = Math.sin(angle * (Math.PI / 180)) * bikeSize.stemLength() * config.scalingFactor;
+                return bikeSize.stemSteeringCenterXLocation() - xDelta;
+            });
+
+            bikeSize.stemEndCenterYLocation = ko.computed(function () {
+                var angle = (bikeSize.stemAngle()) - bikeSize.headTubeAngle();
+                var yDelta = Math.cos(angle * (Math.PI / 180)) * bikeSize.stemLength() * config.scalingFactor;
+                return bikeSize.stemSteeringCenterYLocation() - yDelta;
+            });
+
+            bikeSize.padCenterXLocation = ko.computed(function() {
+                return bikeSize.stemEndCenterXLocation() + bikeSize.armPadOffset() * config.scalingFactor;
+            });
+
+            bikeSize.padCenterYLocation = ko.computed(function () {
+                return bikeSize.stemEndCenterYLocation() - bikeSize.armPadSpacers() * config.scalingFactor;
+            });
+
+            bikeSize.aeroBarStartXLocation = ko.computed(function() {
+                return bikeSize.stemEndCenterXLocation() + bikeSize.armPadOffset() * config.scalingFactor;
+            });
+
+            bikeSize.aeroBarStartYLocation = ko.computed(function () {
+                return bikeSize.stemEndCenterYLocation() - bikeSize.aeroBarSpacers() * config.scalingFactor;
+            });
+
+            bikeSize.padStack = ko.computed(function() {
+                return Math.round(-(bikeSize.padCenterYLocation() - bikeSize.bbYloc()) / config.scalingFactor) + 'mm';
+            });
+
+            bikeSize.padReach = ko.computed(function() {
+                return Math.round((bikeSize.padCenterXLocation() - bikeSize.bbXloc()) / config.scalingFactor) + 'mm';
             });
         }
 

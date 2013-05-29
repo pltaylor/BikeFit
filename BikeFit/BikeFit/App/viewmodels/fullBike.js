@@ -35,12 +35,40 @@
             model.subscribe(function (newValue) {
                 datacontext.getBikeSizes(sizes, newValue.bikeModelID());
                 size(sizes()[0]);
+                
+                
             });
 
             var sizes = ko.observableArray();
             var size = ko.observable();
             size.subscribe(function (newValue) {
                 drawFrame(newValue);
+                
+                newValue.headSetTopCap.subscribe(function () {
+                    drawFrame(newValue);
+                });
+                newValue.steeringSpacers.subscribe(function () {
+                    drawFrame(newValue);
+                });
+                newValue.stemThickness.subscribe(function () {
+                    drawFrame(newValue);
+                });
+                newValue.stemAngle.subscribe(function () {
+                    drawFrame(newValue);
+                });
+                newValue.stemLength.subscribe(function () {
+                    drawFrame(newValue);
+                });
+                newValue.aeroBarSpacers.subscribe(function () {
+                    drawFrame(newValue);
+                });
+                newValue.armPadSpacers.subscribe(function () {
+                    drawFrame(newValue);
+                });
+                newValue.armPadOffset.subscribe(function () {
+                    drawFrame(newValue);
+                });
+                
             });
 
             var output = {
@@ -112,6 +140,31 @@
                     ctx.beginPath();
                     ctx.moveTo(localSize.frontWheelXloc(), localSize.frontWheelYloc());
                     ctx.lineTo(localSize.headTubeBottomXloc(), localSize.headTubeBottomYloc());
+                    ctx.strokeStyle = color;
+                    ctx.stroke();
+                    
+                    // create headset stack
+                    ctx.beginPath();
+                    ctx.moveTo(localSize.headTubeTopXloc(), localSize.headTubeTopYloc());
+                    ctx.lineTo(localSize.stemSteeringCenterXLocation(), localSize.stemSteeringCenterYLocation());
+                    ctx.strokeStyle = color;
+                    ctx.stroke();
+                    // Create stem
+                    ctx.beginPath();
+                    ctx.moveTo(localSize.stemSteeringCenterXLocation(), localSize.stemSteeringCenterYLocation());
+                    ctx.lineTo(localSize.stemEndCenterXLocation(), localSize.stemEndCenterYLocation());
+                    ctx.strokeStyle = color;
+                    ctx.stroke();
+                    // create arm pads
+                    ctx.beginPath();
+                    ctx.moveTo(localSize.padCenterXLocation() - 5, localSize.padCenterYLocation());
+                    ctx.lineTo(localSize.padCenterXLocation() + 5, localSize.padCenterYLocation());
+                    ctx.strokeStyle = color;
+                    ctx.stroke();
+                    // create aero bar
+                    ctx.beginPath();
+                    ctx.moveTo(localSize.aeroBarStartXLocation(), localSize.aeroBarStartYLocation());
+                    ctx.lineTo(localSize.aeroBarStartXLocation() + 30, localSize.aeroBarStartYLocation());
                     ctx.strokeStyle = color;
                     ctx.stroke();
                 }

@@ -282,7 +282,7 @@
     <Content Include="Content\styles.css" />
     <Content Include="Content\toastr.css" />
     <Content Include="Content\toastr.min.css" />
-    <Content Include="favicon.png" />
+    <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\toastr.less" />
     <Content Include="Content\font\fontawesome-webfont.woff" />
@@ -298,7 +298,6 @@
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\breeze.debug.js" />
     <Content Include="Scripts\breeze.min.js" />
-    <Content Include="Scripts\customKOBindings.js" />
     <Content Include="Scripts\jquery-2.0.0.js" />
     <Content Include="Scripts\jquery-2.0.0.min.js" />
     <Content Include="Scripts\knockout-2.2.1.debug.js" />
