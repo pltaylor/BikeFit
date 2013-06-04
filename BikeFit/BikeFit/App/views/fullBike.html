@@ -24,60 +24,83 @@
             </div>
             <div data-bind="with: size">
                 <div class="row">
-                    <div class="form-horizontal well well-small span4">
+                    <div class="form-horizontal well well-small span6">
                         <h3 class="text-center">Headset Information</h3>
                         <div class="control-group">
-                            <label class="control-label">Cap Height:</label>
+                            <label class="control-label" for="capHeight">Cap Height:</label>
                             <div class="controls">
-                                <input class="input-small" data-bind="value: headSetTopCap" />
+                                <input class="input-mini" id="capHeight" data-bind="value: headSetTopCap" />
                             </div>
                         </div>
                         <div class="control-group">
                             <label class="control-label">Steerer Spacers:</label>
                             <div class="controls">
-                                <input class="input-small" data-bind="value: steeringSpacers" />
+                                <input class="input-mini" data-bind="value: steeringSpacers" />
                             </div>
                         </div>
                     </div>
-                    <div class="form-horizontal well well-small span4">
+                    <div class="form-horizontal well well-small span6">
+                        <h3 class="text-center">Seat Information</h3>
+                        <div class="control-group">
+                            <label class="control-label">BB-Seat Distance:</label>
+                            <div class="controls">
+                                <input class="input-mini" data-bind="value: bbToSeatDistance" />
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">Seat Tube Angle:</label>
+                            <div class="controls">
+                                <input class="input-mini" data-bind="value: seatTubeAngle" />
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">Seat Length:</label>
+                            <div class="controls">
+                                <input class="input-mini" data-bind="value: seatLength" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-horizontal well well-small span6">
                         <h3 class="text-center">Stem Information</h3>
                         <div class="control-group">
                             <label class="control-label">Length:</label>
                             <div class="controls">
-                                <input class="input-small" data-bind="value: stemLength" />
+                                <input class="input-mini" data-bind="value: stemLength" />
                             </div>
                         </div>
                         <div class="control-group">
                             <label class="control-label">Angle:</label>
                             <div class="controls">
-                                <input class="input-small" data-bind="value: stemAngle" />
+                                <input class="input-mini" data-bind="value: stemAngle" />
                             </div>
                         </div>
                         <div class="control-group">
                             <label class="control-label">Steerer Clamp Ht.:</label>
                             <div class="controls">
-                                <input class="input-small" data-bind="value: stemThickness" />
+                                <input class="input-mini" data-bind="value: stemThickness" />
                             </div>
                         </div>
                     </div>
-                    <div class="form-horizontal well well-small span4">
+                    <div class="form-horizontal well well-small span6">
                         <h3 class="text-center">Aero Bar Information</h3>
                         <div class="control-group">
                             <label class="control-label">Aero Bar Spacers:</label>
                             <div class="controls">
-                                <input class="input-small" data-bind="value: aeroBarSpacers" />
+                                <input class="input-mini" data-bind="value: aeroBarSpacers" />
                             </div>
                         </div>
                         <div class="control-group">
                             <label class="control-label">Arm Pad Spacers:</label>
                             <div class="controls">
-                                <input class="input-small" data-bind="value: armPadSpacers" />
+                                <input class="input-mini" data-bind="value: armPadSpacers" />
                             </div>
                         </div>
                         <div class="control-group">
                             <label class="control-label">Arm Pad Offset:</label>
                             <div class="controls">
-                                <input class="input-small" data-bind="value: armPadOffset" />
+                                <input class="input-mini" data-bind="value: armPadOffset" />
                             </div>
                         </div>
                     </div>

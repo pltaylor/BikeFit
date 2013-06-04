@@ -241,6 +241,23 @@
             bikeSize.padReach = ko.computed(function() {
                 return Math.round((bikeSize.padCenterXLocation() - bikeSize.bbXloc()) / config.scalingFactor) + 'mm';
             });
+
+            bikeSize.bbToSeatDistance = ko.observable(650);
+
+            bikeSize.seatLength = ko.observable(50);
+
+            bikeSize.seatTubeAngle = ko.observable(bikeSize.avgSeatTubeAngle());
+
+            bikeSize.seatXLocation = ko.computed(function() {
+                var xDelta = Math.sin((90 - bikeSize.seatTubeAngle()) * (Math.PI / 180)) * (bikeSize.bbToSeatDistance() * config.scalingFactor);
+                return bikeSize.bbXloc() - xDelta;
+            });
+
+            bikeSize.seatYLocation = ko.computed(function () {
+                var yDelta = Math.cos((90 - bikeSize.seatTubeAngle()) * (Math.PI / 180)) * (bikeSize.bbToSeatDistance() * config.scalingFactor);
+                return bikeSize.bbYloc() - yDelta;
+            })
+            
         }
 
         //#endregion

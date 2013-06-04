@@ -68,6 +68,15 @@
                 newValue.armPadOffset.subscribe(function () {
                     drawFrame(newValue);
                 });
+                newValue.bbToSeatDistance.subscribe(function () {
+                    drawFrame(newValue);
+                });
+                newValue.seatLength.subscribe(function () {
+                    drawFrame(newValue);
+                });
+                newValue.seatTubeAngle.subscribe(function () {
+                    drawFrame(newValue);
+                });
                 
             });
 
@@ -165,6 +174,18 @@
                     ctx.beginPath();
                     ctx.moveTo(localSize.aeroBarStartXLocation(), localSize.aeroBarStartYLocation());
                     ctx.lineTo(localSize.aeroBarStartXLocation() + 30, localSize.aeroBarStartYLocation());
+                    ctx.strokeStyle = color;
+                    ctx.stroke();
+                    // create seat tube
+                    ctx.beginPath();
+                    ctx.moveTo(localSize.seatTubeXloc(), localSize.seatTubeYloc());
+                    ctx.lineTo(localSize.seatXLocation(), localSize.seatYLocation());
+                    ctx.strokeStyle = color;
+                    ctx.stroke();
+                    // Create seat
+                    ctx.beginPath();
+                    ctx.moveTo(localSize.seatXLocation() - localSize.seatLength() / 2, localSize.seatYLocation());
+                    ctx.lineTo(localSize.seatXLocation() + localSize.seatLength() / 2, localSize.seatYLocation());
                     ctx.strokeStyle = color;
                     ctx.stroke();
                 }
