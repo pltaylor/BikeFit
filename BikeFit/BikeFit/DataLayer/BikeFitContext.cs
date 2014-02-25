@@ -7,7 +7,7 @@ namespace BikeFit.DataLayer
     public class BikeFitContext : DbContext 
     {
         public BikeFitContext()
-            : base("name=DefaultConnection")
+            : base("name=AzureConnection")
         {
         }
 

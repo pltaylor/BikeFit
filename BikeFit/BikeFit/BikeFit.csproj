@@ -39,6 +39,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <PublishDatabases>false</PublishDatabases>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Breeze.WebApi, Version=1.2.8.0, Culture=neutral, PublicKeyToken=f6085f1a45e2ac59, processorArchitecture=MSIL">
@@ -291,6 +292,7 @@
     <Content Include="Content\font\FontAwesome.otf" />
     <None Include="Properties\PublishProfiles\bikefit - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\bikefit - Web Deploy.pubxml" />
+    <None Include="Properties\PublishProfiles\bikefitter.pubxml" />
     <None Include="Properties\PublishProfiles\PerrysAzure.pubxml" />
     <None Include="Scripts\jquery-2.0.0.intellisense.js" />
     <None Include="Scripts\breeze.intellisense.js" />
