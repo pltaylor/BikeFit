@@ -285,11 +285,11 @@
     <Content Include="Content\toastr.min.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
-    <Content Include="Content\toastr.less" />
     <Content Include="Content\font\fontawesome-webfont.woff" />
     <Content Include="Content\font\fontawesome-webfont.ttf" />
     <Content Include="Content\font\fontawesome-webfont.eot" />
     <Content Include="Content\font\FontAwesome.otf" />
+    <Content Include="Content\toastr.less" />
     <None Include="Properties\PublishProfiles\bikefit - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\bikefit - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\bikefitter.pubxml" />
@@ -329,6 +329,7 @@
     <Content Include="Views\Account\ExternalLoginFailure.cshtml" />
     <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
     <Content Include="Views\Account\_RemoveExternalLoginsPartial.cshtml" />
+    <Content Include="Scripts\toastr.min.js.map" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201304221808448_InitialCreate.resx">
