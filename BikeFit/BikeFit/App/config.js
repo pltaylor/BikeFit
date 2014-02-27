@@ -29,7 +29,7 @@
         moduleId: 'viewmodels/faq',
         name: 'FAQ',
         visible: true,
-        caption: '<i class="icon-question"></i> FAQ'
+        caption: 'FAQ'
     }, {
         url: 'login',
         moduleId: 'viewmodels/login',
@@ -55,7 +55,7 @@
         moduleId: 'viewmodels/faq',
         name: 'FAQ',
         visible: true,
-        caption: '<i class="icon-question"></i> FAQ'
+        caption: 'FAQ'
     }, {
         url: 'login',
         moduleId: 'viewmodels/login',
@@ -79,7 +79,7 @@
         moduleId: 'viewmodels/frameAdmin',
         name: 'Frame Admin',
         visible: true,
-        caption: '<i class="icon-plus"></i> Frame Admin'
+        caption: 'Frame Admin'
     }];
 
     return {
