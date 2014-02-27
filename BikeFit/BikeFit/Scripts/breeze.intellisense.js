@@ -1,4 +1,4 @@
-﻿// Generated on: Thu May 23 2013 16:28:27 GMT-0700 (Pacific Daylight Time)
+﻿// Generated on: Tue Aug 13 2013 13:53:49 GMT-0700 (Pacific Daylight Time)
 
 intellisense.annotate(breeze.core, {
 
@@ -237,11 +237,12 @@ intellisense.annotate(breeze.breeze, {
   'ValidationError': function() {
     /// <signature>
     ///   <summary>
-    ///   A ValidatationError is used to describe a failed validation.
+    ///   A ValidationError is used to describe a failed validation.
     ///   </summary>
-    ///   <param name="validator" type="breeze.breeze.Validator" optional="true"></param>
-    ///   <param name="context" type="Object" optional="true"></param>
-    ///   <param name="errorMessage" type="String" optional="true"></param>
+    ///   <param name="validator" type="Validator || null" optional="true">The Validator used to create this error, if any.</param>
+    ///   <param name="context" type="" optional="true">{ ContextObject || null) The Context object used in conjunction with the Validator to create this error.</param>
+    ///   <param name="errorMessage" type="String" optional="true">The actual error message</param>
+    ///   <param name="key" type="String" optional="true">An optional key used to define a key for this error. One will be created automatically if not provided here.</param>
     /// </signature>
   },
 
@@ -431,8 +432,7 @@ intellisense.annotate(breeze.breeze, {
     ///   </summary>
     ///   <param name="property" type="String" optional="true">A property name, a nested property name or an expression involving a property name.</param>
     ///   <param name="operator" type="FilterQueryOp|String" optional="true"></param>
-    ///   <param name="value" type="Object" optional="true">- This will be treated as either a property expression or a literal depending on context.  In general,              if the value can be interpreted as a property expression it will be, otherwise it will be treated as a literal.              In most cases this works well, but you can also force the interpretation by setting the next parameter 'valueIsLiteral' to true.</param>
-    ///   <param name="valueIsLiteral" type="Boolean" optional="true">- Used to force the 'value' parameter to be treated as a literal - otherwise this will be inferred based on the context.</param>
+    ///   <param name="value" type="Object" optional="true">- This will be treated as either a property expression or a literal depending on context.  In general,              if the value can be interpreted as a property expression it will be, otherwise it will be treated as a literal.              In most cases this works well, but you can also force the interpretation by making the value argument itself an object with a 'value' property and an 'isLiteral' property set to either true or false.             Breeze also tries to infer the dataType of any literal based on context, if this fails you can force this inference by making the value argument an object with a 'value' property and a 'dataType'property set             to one of the breeze.DataType enumeration instances.</param>
     /// </signature>
   },
 
@@ -718,6 +718,79 @@ intellisense.annotate(breeze.breeze.Validator, {
     ///   <returns type="breeze.breeze.Validator >A new Validator</returns>
     /// </signature>
   },
+  'creditCard': function() {
+    /// <signature>
+    ///   <summary>
+    ///   Returns a credit card number validator
+    ///   Performs a luhn algorithm checksum test for plausability
+    ///   catches simple mistakes; only service knows for sure
+    ///   </summary>
+    ///   <param name="context" type="Object" optional="true">optional parameters to pass through to validation constructor</param>
+    ///   <returns type="breeze.breeze.Validator >A new Validator</returns>
+    /// </signature>
+  },
+  'regularExpression': function() {
+    /// <signature>
+    ///   <summary>
+    ///   Returns a regular expression validator; the expression must be specified
+    ///   </summary>
+    ///   <param name="context" type="Object" optional="true"></param>
+    ///   <returns type="breeze.breeze.Validator >A new Validator</returns>
+    /// </signature>
+  },
+  'emailAddress': function() {
+    /// <signature>
+    ///   <summary>
+    ///   Returns the email address validator
+    ///   </summary>
+    ///   <param name="context" type="Object" optional="true">optional parameters to pass through to validation constructor</param>
+    ///   <returns type="breeze.breeze.Validator >A new Validator</returns>
+    /// </signature>
+  },
+  'phone': function() {
+    /// <signature>
+    ///   <summary>
+    ///   Returns the phone validator
+    ///   Provides basic assertions on the format and will help to eliminate most nonsense input
+    ///   Matches:
+    ///     International dialing prefix: {{}, +, 0, 0000} (with or without a trailing break character, if not '+': [-/. ])
+    ///       > ((\+)|(0(\d+)?[-/.\s]))
+    ///     Country code: {{}, 1, ..., 999} (with or without a trailing break character: [-/. ])
+    ///       > [1-9]\d{,2}[-/.\s]?
+    ///     Area code: {(0), ..., (000000), 0, ..., 000000} (with or without a trailing break character: [-/. ])
+    ///       > ((\(\d{1,6}\)|\d{1,6})[-/.\s]?)?
+    ///     Local: {0, ...}+ (with or without a trailing break character: [-/. ])
+    ///       > (\d+[-/.\s]?)+\d+
+    ///   </summary>
+    ///   <param name="context" type="Object" optional="true">optional parameters to pass through to validation constructor</param>
+    ///   <returns type="breeze.breeze.Validator >A new Validator</returns>
+    /// </signature>
+  },
+  'url': function() {
+    /// <signature>
+    ///   <summary>
+    ///   Returns the URL (protocol required) validator
+    ///   </summary>
+    ///   <param name="context" type="Object" optional="true">optional parameters to pass through to validation constructor</param>
+    ///   <returns type="breeze.breeze.Validator >A new Validator</returns>
+    /// </signature>
+  },
+  'makeRegExpValidator': function() {
+    /// <signature>
+    ///   <summary>
+    ///   Creates a regular expression validator with a fixed expression.
+    ///   Many of the stock validators are built with this factory method.
+    ///   Their expressions are often derived from 
+    ///   https://github.com/srkirkland/DataAnnotationsExtensions/blob/master/DataAnnotationsExtensions
+    ///   You can try many of them at http://dataannotationsextensions.org/
+    ///   </summary>
+    ///   <param name="validatorName" type="String" optional="true">name of this validator</param>
+    ///   <param name="expression" type="String | RegExp" optional="true">regular expression to apply</param>
+    ///   <param name="defaultMessage" type="String" optional="true">default message for failed validations</param>
+    ///   <param name="context" type="Object" optional="true">optional parameters to pass through to validation constructor</param>
+    ///   <returns type="breeze.breeze.Validator >A new Validator</returns>
+    /// </signature>
+  },
   
   /// <field name="messageTemplates" type="Object" >Map of standard error message templates keyed by validator name. You can add to or modify this object to customize the template used for any validation error message.</field>
   'messageTemplates': null,
@@ -742,9 +815,25 @@ intellisense.annotate(breeze.breeze.ValidationError.prototype, {
   /// <field name="errorMessage" type="String" >The error message associated with the ValidationError.</field>
   'errorMessage': null,
   
+  /// <field name="key" type="String" >The key by which this validation error may be removed from a collection of ValidationErrors.</field>
+  'key': null,
+  
+  /// <field name="isServerError" type="Bool" >Whether this is a server error.  </field>
+  'isServerError': null,
+  
 });
 intellisense.annotate(breeze.breeze.ValidationError, {
   
+  'getKey': function() {
+    /// <signature>
+    ///   <summary>
+    ///   Composes a ValidationError 'key' given a validator or an errorName and an optional propertyName
+    ///   </summary>
+    ///   <param name="validator" type="ValidatorOrErrorKey" optional="true">A Validator or an 'error name' if no validator is available.</param>
+    ///   <param name="propertyName" type="" optional="true">A property name</param>
+    ///   <returns type="String >A ValidationError 'key'</returns>
+    /// </signature>
+  },
   
 });
 
@@ -889,6 +978,14 @@ intellisense.annotate(breeze.breeze.EntityAspect.prototype, {
     
     /// </signature>
   },
+  'setDetached': function() {
+    /// <signature>
+    ///   <summary>
+    ///   Sets the entity to an EntityState of 'Detached'.  This removes the entity from all of its related entities, but does NOT change the EntityState of any existing entities.
+    ///   </summary>
+    
+    /// </signature>
+  },
   'loadNavigationProperty': function() {
     /// <signature>
     ///   <summary>
@@ -935,7 +1032,7 @@ intellisense.annotate(breeze.breeze.EntityAspect.prototype, {
   'addValidationError': function() {
     /// <signature>
     ///   <summary>
-    ///   Adds a validation error for a specified property.
+    ///   Adds a validation error.
     ///   </summary>
     ///   <param name="validationError" type="breeze.breeze.ValidationError" optional="true"></param>
     
@@ -944,10 +1041,9 @@ intellisense.annotate(breeze.breeze.EntityAspect.prototype, {
   'removeValidationError': function() {
     /// <signature>
     ///   <summary>
-    ///   Removes a validation error for a specified property.
+    ///   Removes a validation error.
     ///   </summary>
-    ///   <param name="validator" type="breeze.breeze.Validator" optional="true"></param>
-    ///   <param name="property" type="DataProperty|NavigationProperty" optional="true"></param>
+    ///   <param name="validationErrorOrKey" type="ValidationError|String" optional="true">Either a ValidationError or a ValidationError 'key' value</param>
     
     /// </signature>
   },
@@ -971,6 +1067,9 @@ intellisense.annotate(breeze.breeze.EntityAspect.prototype, {
   
   /// <field name="isBeingSaved" type="Boolean" >Whether this entity is in the process of being saved.</field>
   'isBeingSaved': null,
+  
+  /// <field name="hasValidationErrors" type="Boolean" >Whether this entity has any validation errors.</field>
+  'hasValidationErrors': null,
   
   /// <field name="originalValues" type="Object" >The 'original values' of this entity where they are different from the 'current values'.  This is a map where the key is a property name and the value is the 'original value' of the property.</field>
   'originalValues': null,
@@ -1286,7 +1385,7 @@ intellisense.annotate(breeze.breeze.MetadataStore.prototype, {
     ///   Returns the DataService for a specified service name
     ///   </summary>
     ///   <param name="serviceName" type="String" optional="true">The service name.</param>
-    ///   <returns type="Boolean" ></returns>
+    ///   <returns type="breeze.breeze.DataService" ></returns>
     /// </signature>
   },
   'fetchMetadata': function() {
@@ -1536,7 +1635,7 @@ intellisense.annotate(breeze.breeze.EntityType.prototype, {
   /// <field name="defaultResourceName" type="String" >The default resource name associated with this EntityType.  An EntityType may be queried via a variety of 'resource names' but this one  is used as the default when no resource name is provided.  This will occur when calling  'EntityAspect/loadNavigationProperty' or when executing any  'EntityQuery' that was created via an  'EntityKey'.</field>
   'defaultResourceName': null,
   
-  /// <field name="name" type="String" >The fully qualifed name of this EntityType.</field>
+  /// <field name="name" type="String" >The fully qualified name of this EntityType.</field>
   'name': null,
   
   /// <field name="shortName" type="String" >The short, unqualified, name for this EntityType.</field>
@@ -1861,7 +1960,7 @@ intellisense.annotate(breeze.breeze.EntityQuery.prototype, {
     ///   <summary>
     ///   Returns a new query that orders the results of the query by property name.  By default sorting occurs is ascending order, but sorting in descending order is supported as well.
     ///   </summary>
-    ///   <param name="propertyPaths" type="String|Array of String" optional="true">A comma-separated (',') string of property paths or an array of property paths. Each property path can optionally end with ' desc' to force a descending sort order.</param>
+    ///   <param name="propertyPaths" type="String|Array of String" optional="true">A comma-separated (',') string of property paths or an array of property paths.  Each property path can optionally end with ' desc' to force a descending sort order. If 'propertyPaths' is either null or omitted then all ordering is removed.</param>
     ///   <returns type="breeze.breeze.EntityQuery" ></returns>
     /// </signature>
   },
@@ -1870,7 +1969,7 @@ intellisense.annotate(breeze.breeze.EntityQuery.prototype, {
     ///   <summary>
     ///   Returns a new query that orders the results of the query by property name in descending order.
     ///   </summary>
-    ///   <param name="propertyPaths" type="String|Array of String" optional="true">A comma-separated (',') string of property paths or an array of property paths.</param>
+    ///   <param name="propertyPaths" type="String|Array of String" optional="true">A comma-separated (',') string of property paths or an array of property paths.  If 'propertyPaths' is either null or omitted then all ordering is removed.</param>
     ///   <returns type="breeze.breeze.EntityQuery" ></returns>
     /// </signature>
   },
@@ -1883,7 +1982,7 @@ intellisense.annotate(breeze.breeze.EntityQuery.prototype, {
     ///   be made 'observable'.
     ///   Any simple properties, i.e. strings, numbers or dates within a projection will not be cached are will NOT be made 'observable'.
     ///   </summary>
-    ///   <param name="propertyPaths" type="String|Array of String" optional="true">A comma-separated (',') string of property paths or an array of property paths.</param>
+    ///   <param name="propertyPaths" type="String|Array of String" optional="true">A comma-separated (',') string of property paths or an array of property paths. If 'propertyPaths' is either null or omitted then any existing projection on the query is removed.</param>
     ///   <returns type="breeze.breeze.EntityQuery" ></returns>
     /// </signature>
   },
@@ -1891,8 +1990,9 @@ intellisense.annotate(breeze.breeze.EntityQuery.prototype, {
     /// <signature>
     ///   <summary>
     ///   Returns a new query that skips the specified number of entities when returning results.
+    ///   Any existing 'skip' can be cleared by calling 'skip' with no arguments.
     ///   </summary>
-    ///   <param name="count" type="Number" optional="true">The number of entities to return. If omitted this clears the</param>
+    ///   <param name="count" type="Number" optional="true">The number of entities to return. If omitted or null any existing skip count on the query is removed.</param>
     ///   <returns type="breeze.breeze.EntityQuery" ></returns>
     /// </signature>
   },
@@ -1900,17 +2000,19 @@ intellisense.annotate(breeze.breeze.EntityQuery.prototype, {
     /// <signature>
     ///   <summary>
     ///   Returns a new query that returns only the specified number of entities when returning results. - Same as 'take'.
+    ///   Any existing 'top' can be cleared by calling 'top' with no arguments.
     ///   </summary>
-    ///   <param name="count" type="Number" optional="true">The number of entities to return.</param>
+    ///   <param name="count" type="Number" optional="true">The number of entities to return.  If 'count' is either null or omitted then any existing 'top' count on the query is removed.</param>
     ///   <returns type="breeze.breeze.EntityQuery" ></returns>
     /// </signature>
   },
   'take': function() {
     /// <signature>
     ///   <summary>
-    ///   Returns a new query that returns only the specified number of entities when returning results - Same as 'top'
+    ///   Returns a new query that returns only the specified number of entities when returning results - Same as 'top'.  
+    ///   Any existing take can be cleared by calling take with no arguments.
     ///   </summary>
-    ///   <param name="count" type="Number" optional="true">The number of entities to return.</param>
+    ///   <param name="count" type="Number" optional="true">The number of entities to return. If 'count' is either null or omitted then any existing 'take' count on the query is removed.</param>
     ///   <returns type="breeze.breeze.EntityQuery" ></returns>
     /// </signature>
   },
@@ -1920,7 +2022,7 @@ intellisense.annotate(breeze.breeze.EntityQuery.prototype, {
     ///   Returns a new query that will return related entities nested within its results. The expand method allows you to identify related entities, via navigation property
     ///   names such that a graph of entities may be retrieved with a single request. Any filtering occurs before the results are 'expanded'.
     ///   </summary>
-    ///   <param name="propertyPaths" type="String|Array of String" optional="true">A comma-separated list of navigation property names or an array of navigation property names. Each Navigation Property name can be followed by a '.' and another navigation property name to enable identifying a multi-level relationship</param>
+    ///   <param name="propertyPaths" type="String|Array of String" optional="true">A comma-separated list of navigation property names or an array of navigation property names. Each Navigation Property name can be followed by a '.' and another navigation property name to enable identifying a multi-level relationship.  If 'propertyPaths' is either null or omitted then any existing 'expand' clause on the query is removed.</param>
     ///   <returns type="breeze.breeze.EntityQuery" ></returns>
     /// </signature>
   },
@@ -1975,6 +2077,9 @@ intellisense.annotate(breeze.breeze.EntityQuery.prototype, {
   
   /// <field name="resourceName" type="String" >The resource name used by this query.</field>
   'resourceName': null,
+  
+  /// <field name="resultEntityType" type="breeze.breeze.EntityType" >The entityType that will be returned by this query. This property will only be set if the 'toType' method was called. </field>
+  'resultEntityType': null,
   
   /// <field name="wherePredicate" type="breeze.breeze.Predicate" >The 'where' predicate used by this query.</field>
   'wherePredicate': null,
@@ -2084,7 +2189,7 @@ intellisense.annotate(breeze.breeze.Predicate.prototype, {
     ///   <summary>
     ///   'And's this Predicate with one or more other Predicates and returns a new 'composite' Predicate
     ///   </summary>
-    ///   <param name="predicates" type="Multiple Predicates|Array of Predicate" optional="true"></param>
+    ///   <param name="predicates" type="Multiple Predicates|Array of Predicate" optional="true">Any null or undefined values passed in will be automatically filtered out before constructing the composite predicate.</param>
     
     /// </signature>
   },
@@ -2093,7 +2198,7 @@ intellisense.annotate(breeze.breeze.Predicate.prototype, {
     ///   <summary>
     ///   'Or's this Predicate with one or more other Predicates and returns a new 'composite' Predicate
     ///   </summary>
-    ///   <param name="predicates" type="Multiple Predicates|Array of Predicate" optional="true"></param>
+    ///   <param name="predicates" type="Multiple Predicates|Array of Predicate" optional="true">Any null or undefined values passed in will be automatically filtered out before constructing the composite predicate.</param>
     
     /// </signature>
   },
@@ -2151,8 +2256,7 @@ intellisense.annotate(breeze.breeze.Predicate, {
     ///   </summary>
     ///   <param name="property" type="String" optional="true">A property name, a nested property name or an expression involving a property name.</param>
     ///   <param name="operator" type="FilterQueryOp|String" optional="true"></param>
-    ///   <param name="value" type="Object" optional="true">- This will be treated as either a property expression or a literal depending on context.  In general,              if the value can be interpreted as a property expression it will be, otherwise it will be treated as a literal.              In most cases this works well, but you can also force the interpretation by setting the next parameter 'valueIsLiteral' to true.</param>
-    ///   <param name="valueIsLiteral" type="Boolean" optional="true">- Used to force the 'value' parameter to be treated as a literal - otherwise this will be inferred based on the context.</param>
+    ///   <param name="value" type="Object" optional="true">- This will be treated as either a property expression or a literal depending on context.  In general,              if the value can be interpreted as a property expression it will be, otherwise it will be treated as a literal.              In most cases this works well, but you can also force the interpretation by making the value argument itself an object with a 'value' property and an 'isLiteral' property set to either true or false.             Breeze also tries to infer the dataType of any literal based on context, if this fails you can force this inference by making the value argument an object with a 'value' property and a 'dataType'property set             to one of the breeze.DataType enumeration instances.</param>
     
     /// </signature>
   },
@@ -2161,7 +2265,7 @@ intellisense.annotate(breeze.breeze.Predicate, {
     ///   <summary>
     ///   Creates a 'composite' Predicate by 'and'ing a set of specified Predicates together.
     ///   </summary>
-    ///   <param name="predicates" type="Multiple Predicates|Array of Predicate" optional="true"></param>
+    ///   <param name="predicates" type="Multiple Predicates|Array of Predicate" optional="true">Any null or undefined values passed in will be automatically filtered out before constructing the composite predicate.</param>
     
     /// </signature>
   },
@@ -2170,7 +2274,7 @@ intellisense.annotate(breeze.breeze.Predicate, {
     ///   <summary>
     ///   Creates a 'composite' Predicate by 'or'ing a set of specified Predicates together.
     ///   </summary>
-    ///   <param name="predicates" type="Multiple Predicates|Array of Predicate" optional="true"></param>
+    ///   <param name="predicates" type="Multiple Predicates|Array of Predicate" optional="true">Any null or undefined values passed in will be automatically filtered out before constructing the composite predicate.</param>
     
     /// </signature>
   },
@@ -2292,9 +2396,9 @@ intellisense.annotate(breeze.breeze.EntityManager.prototype, {
     ///   <summary>
     ///   Imports a previously exported result into this EntityManager.
     ///   </summary>
-    ///   <param name="exportedString" type="String" optional="true">The result of a previous 'export' call.</param>
+    ///   <param name="exportedString" type="String|Json" optional="true">The result of a previous 'export' call.</param>
     ///   <param name="config" type="Object" optional="true">A configuration object.</param>
-    
+    ///   <returns type="Object" >result  </returns>
     /// </signature>
   },
   'clear': function() {
@@ -2521,7 +2625,7 @@ intellisense.annotate(breeze.breeze.EntityManager, {
     ///   </summary>
     ///   <param name="exportedString" type="String" optional="true">The result of a previous 'exportEntities' call.</param>
     ///   <param name="config" type="Object" optional="true">A configuration object.</param>
-    ///   <returns type="breeze.breeze.EntityManager >A new EntityManager.</returns>
+    ///   <returns type="breeze.breeze.EntityManager >A new EntityManager.  Note that the return value of this method call is different from that  provided by the same named method on an EntityManager instance. Use that method if you need additional information regarding the imported entities.</returns>
     /// </signature>
   },
   

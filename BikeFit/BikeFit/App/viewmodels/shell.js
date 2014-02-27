@@ -59,5 +59,9 @@
         function log(msg, data, showToast) {
             logger.log(msg, data, system.getModuleId(shell), showToast);
         }
+
+        function logError(msg, data, showToast) {
+            logger.logError(msg, data, system.getModuleId(shell), showToast);
+        }
         //#endregion
     });
