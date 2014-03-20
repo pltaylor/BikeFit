@@ -21,28 +21,27 @@
             return $.post("/Account/LogIn", data)
                 .done(function (recievedData) {
                     if (recievedData == true) {
-                        router.deactivate();
-                        return router.map(config.routesLoggedIn);
+                        router.reset();
+                        return router.makeRelative({ moduleId: 'viewmodels' }) // router will look here for viewmodels by convention
+                            .map(config.routesLoggedIn) // Map the routes
+                            .buildNavigationModel(); // Finds all nav routes and readies them
                     } else {
-                        router.deactivate();
-                        return router.map(config.routes);
+                        //router.deactivate();
+                        router.reset();
+                        return router.makeRelative({ moduleId: 'viewmodels' }) // router will look here for viewmodels by convention
+                            .map(config.routes) // Map the routes
+                            .buildNavigationModel(); // Finds all nav routes and readies them
                     }
                 }).done(function() {
-                    router.activate('frames');
+                    //router.activate('frames');
                     return router.navigate('#/frames');
                 });
-        };
-
-        self.register = function() {
-            var url = '#/register';
-            router.navigate(url);
         };
         
         var vm = {
             logIn: self.send,
             password: self.pass,
             rememberMe: self.remember,
-            //register: self.register,
             userName: self.user
         };
 
