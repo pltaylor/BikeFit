@@ -48,8 +48,7 @@
         function bikeModelInitializer(bikeModel) {
             bikeModel.sizes = ko.observableArray();
 
-            bikeModel.manufacturedStart
-            Formatted = ko.computed({
+            bikeModel.manufacturedStartDateFormatted = ko.computed({
                 read: function () {
                     var manufacturedStartDate = bikeModel.manufacturedStartDate();
                     var calendar = moment(manufacturedStartDate).calendar();
