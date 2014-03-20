@@ -3,8 +3,8 @@
         <a class="brand" href="/">
             <span class="title">My Tri Bike Fit</span> 
         </a>
-        <div class="btn-group" data-bind="foreach: router.visibleRoutes">
-            <a data-bind="css: { active: isActive }, attr: { href: hash }, html: caption" 
+        <div class="btn-group" data-bind="foreach: router.navigationModel">
+            <a data-bind="css: { active: isActive }, attr: { href: hash }, text: title"
                class="btn btn-info" href="#"></a>
         </div>
         <div class="btn-group" data-bind="visible: isAdmin">
