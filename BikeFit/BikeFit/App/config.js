@@ -13,7 +13,7 @@
     var scalingFactor = .22;
     
     var routes = [{
-        route: 'frames',
+        route: '',
         moduleId: 'frames',
         title: 'Frames',
         nav: true

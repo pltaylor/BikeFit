@@ -5,16 +5,18 @@
         'services/datacontext'],
     function (system, router, logger, config, datacontext) {
 
-        //var adminRoutes = ko.computed(function () {
-        //    return router.allRoutes().filter(function (r) {
-        //        return r.settings.admin;
-        //    });
-        //});
+        var adminRoutes = ko.computed(function () {
+            return router.routes.filter(function (r) {
+                return r.settings.admin;
+            });
+        });
 
-        //var isLoggedIn = ko.observable(false);
+        var isLoggedIn = ko.observable(false);
 
         var shell = {
             activate: activate,
+            adminRoutes: adminRoutes,
+            isAdmin: isLoggedIn,
             router: router
         };
 
@@ -22,23 +24,25 @@
 
         //#region Internal Methods
         function activate() {
-            datacontext.primeData()
+            return datacontext.primeData()
                 .then(boot)
                 .fail(failedInitialization);
-            return boot();
+            //return boot();
         }
 
         function checkLogin() {
             return $.post("/Account/IsLoggedIn")
                 .done(function (recievedData) {
                     if (recievedData == true) {
-                        return router.map(config.routesLoggedIn)           // Map the routes
-                .buildNavigationModel() // Finds all nav routes and readies them
-                .activate();            // Activate the router
+                        return router.makeRelative({ moduleId: 'viewmodels' }) // router will look here for viewmodels by convention
+                            .map(config.routesLoggedIn)           // Map the routes
+                            .buildNavigationModel() // Finds all nav routes and readies them
+                            .activate();            // Activate the router
                     } else {
-                        return router.map(config.routes)           // Map the routes
-                .buildNavigationModel() // Finds all nav routes and readies them
-                .activate();            // Activate the router
+                        return router.makeRelative({ moduleId: 'viewmodels' }) // router will look here for viewmodels by convention
+                            .map(config.routes)           // Map the routes
+                            .buildNavigationModel() // Finds all nav routes and readies them
+                            .activate();            // Activate the router
                     }
                 });
         }
