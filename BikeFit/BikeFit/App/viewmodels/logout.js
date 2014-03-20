@@ -1,5 +1,5 @@
 ﻿define(['services/logger',
-        'durandal/plugins/router',
+        'plugins/router',
         'viewmodels/shell',
         'config'
 ],
