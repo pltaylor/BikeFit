@@ -27,20 +27,17 @@
             return datacontext.primeData()
                 .then(boot)
                 .fail(failedInitialization);
-            //return boot();
         }
 
         function checkLogin() {
             return $.post("/Account/IsLoggedIn")
                 .done(function (recievedData) {
                     if (recievedData == true) {
-                        return router.makeRelative({ moduleId: 'viewmodels' }) // router will look here for viewmodels by convention
-                            .map(config.routesLoggedIn)           // Map the routes
+                        return router.map(config.routesLoggedIn)           // Map the routes
                             .buildNavigationModel() // Finds all nav routes and readies them
                             .activate();            // Activate the router
                     } else {
-                        return router.makeRelative({ moduleId: 'viewmodels' }) // router will look here for viewmodels by convention
-                            .map(config.routes)           // Map the routes
+                        return router.map(config.routes)           // Map the routes
                             .buildNavigationModel() // Finds all nav routes and readies them
                             .activate();            // Activate the router
                     }
@@ -54,11 +51,6 @@
             });
 
             return checkLogin();
-
-            //return router.makeRelative({ moduleId: 'viewmodels' }) // router will look here for viewmodels by convention
-            //    .map(config.routesLoggedIn)            // Map the routes
-            //    .buildNavigationModel() // Finds all nav routes and readies them
-            //    .activate();            // Activate the router
         }
 
         function goToAdmin(item) {

@@ -14,59 +14,59 @@
     
     var routes = [{
         route: '',
-        moduleId: 'frames',
+        moduleId: 'viewmodels/frames',
         title: 'Frames',
         nav: true
     }, {
         route: 'fullBike',
-        moduleId: 'fullBike',
+        moduleId: 'viewmodels/fullBike',
         title: 'Full Bike',
         nav: true
     }, {
         route: 'faq',
-        moduleId: 'faq',
+        moduleId: 'viewmodels/faq',
         title: 'FAQ',
         nav: true
     }, {
         route: 'login',
-        moduleId: 'login',
+        moduleId: 'viewmodels/login',
         title: 'Log In',
         nav: true
     }];
     
     var routesLoggedIn = [{
         route: '',
-        moduleId: 'frames',
+        moduleId: 'viewmodels/frames',
         title: 'Frames',
         nav: true
     }, {
         route: 'fullBike',
-        moduleId: 'fullBike',
+        moduleId: 'viewmodels/fullBike',
         title: 'Full Bike',
         nav: true
     }, {
         route: 'faq',
-        moduleId: 'faq',
+        moduleId: 'viewmodels/faq',
         title: 'FAQ',
         nav: true
     }, {
         route: 'login',
-        moduleId: 'login',
+        moduleId: 'viewmodels/login',
         title: 'Log In',
         nav: false
     }, {
         route: 'logout',
-        moduleId: 'logout',
+        moduleId: 'viewmodels/logout',
         title: 'Log Out',
         nav: true
     }, {
         route: 'register',
-        moduleId: 'register',
+        moduleId: 'viewmodels/register',
         title: 'Register',
         nav: true
     }, {
         route: 'frameAdmin',
-        moduleId: 'frameAdmin',
+        moduleId: 'viewmodels/frameAdmin',
         title: 'Frame Admin',
         nav: true
     }];

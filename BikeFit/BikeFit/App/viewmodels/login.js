@@ -22,19 +22,16 @@
                 .done(function (recievedData) {
                     if (recievedData == true) {
                         router.reset();
-                        return router.makeRelative({ moduleId: 'viewmodels' }) // router will look here for viewmodels by convention
-                            .map(config.routesLoggedIn) // Map the routes
+                        return router.map(config.routesLoggedIn) // Map the routes
                             .buildNavigationModel(); // Finds all nav routes and readies them
                     } else {
                         //router.deactivate();
                         router.reset();
-                        return router.makeRelative({ moduleId: 'viewmodels' }) // router will look here for viewmodels by convention
-                            .map(config.routes) // Map the routes
+                        return router.map(config.routes) // Map the routes
                             .buildNavigationModel(); // Finds all nav routes and readies them
                     }
                 }).done(function() {
-                    //router.activate('frames');
-                    return router.navigate('#/frames');
+                    return router.navigate('#');
                 });
         };
         
@@ -46,10 +43,4 @@
         };
 
         return vm;
-
-        //#region Internal Methods
-        function activate() {
-            
-        }
-        //#endregion
     });
