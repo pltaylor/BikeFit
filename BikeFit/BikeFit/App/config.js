@@ -13,73 +13,62 @@
     var scalingFactor = .22;
     
     var routes = [{
-        url: 'frames',
-        moduleId: 'viewmodels/frames',
-        name: 'Frames',
-        visible: true,
-        caption: 'Frames'
+        route: 'frames',
+        moduleId: 'frames',
+        title: 'Frames',
+        nav: true
     }, {
-        url: 'fullBike',
-        moduleId: 'viewmodels/fullBike',
-        name: 'Full Bike',
-        visible: true,
-        caption: 'Full Bike'
+        route: 'fullBike',
+        moduleId: 'fullBike',
+        title: 'Full Bike',
+        nav: true
     }, {
-        url: 'faq',
-        moduleId: 'viewmodels/faq',
-        name: 'FAQ',
-        visible: true,
-        caption: 'FAQ'
+        route: 'faq',
+        moduleId: 'faq',
+        title: 'FAQ',
+        nav: true
     }, {
-        url: 'login',
-        moduleId: 'viewmodels/login',
-        name: 'Log In',
-        visible: true,
-        caption: 'Log In'
+        route: 'login',
+        moduleId: 'login',
+        title: 'Log In',
+        nav: true
     }];
     
     var routesLoggedIn = [{
-        url: 'frames',
-        moduleId: 'viewmodels/frames',
-        name: 'Frames',
-        visible: true,
-        caption: 'Frames'
+        route: '',
+        moduleId: 'frames',
+        title: 'Frames',
+        nav: true
     }, {
-        url: 'fullBike',
-        moduleId: 'viewmodels/fullBike',
-        name: 'Full Bike',
-        visible: true,
-        caption: 'Full Bike'
+        route: 'fullBike',
+        moduleId: 'fullBike',
+        title: 'Full Bike',
+        nav: true
     }, {
-        url: 'faq',
-        moduleId: 'viewmodels/faq',
-        name: 'FAQ',
-        visible: true,
-        caption: 'FAQ'
+        route: 'faq',
+        moduleId: 'faq',
+        title: 'FAQ',
+        nav: true
     }, {
-        url: 'login',
-        moduleId: 'viewmodels/login',
-        name: 'Log In',
-        visible: false,
-        caption: 'Log In'
+        route: 'login',
+        moduleId: 'login',
+        title: 'Log In',
+        nav: false
     }, {
-        url: 'logout',
-        moduleId: 'viewmodels/logout',
-        name: 'Log Out',
-        visible: true,
-        caption: 'Log Out'
+        route: 'logout',
+        moduleId: 'logout',
+        title: 'Log Out',
+        nav: true
     }, {
-        url: 'register',
-        moduleId: 'viewmodels/register',
-        name: 'Register',
-        visible: true,
-        caption: 'Register'
+        route: 'register',
+        moduleId: 'register',
+        title: 'Register',
+        nav: true
     }, {
-        url: 'frameAdmin',
-        moduleId: 'viewmodels/frameAdmin',
-        name: 'Frame Admin',
-        visible: true,
-        caption: 'Frame Admin'
+        route: 'frameAdmin',
+        moduleId: 'frameAdmin',
+        title: 'Frame Admin',
+        nav: true
     }];
 
     return {

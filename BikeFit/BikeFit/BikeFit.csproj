@@ -222,7 +222,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="App\config.js" />
-    <Content Include="App\durandal\plugins\router.js" />
     <Content Include="App\main-built.js" />
     <Content Include="App\main.js" />
     <Content Include="App\services\datacontext.js" />
@@ -355,9 +354,7 @@
   <ItemGroup>
     <Content Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="App\durandal\amd\" />
-  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
