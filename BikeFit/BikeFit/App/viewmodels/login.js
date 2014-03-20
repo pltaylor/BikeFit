@@ -29,13 +29,13 @@
                     }
                 }).done(function() {
                     router.activate('frames');
-                    return router.navigateTo('#/frames');
+                    return router.navigate('#/frames');
                 });
         };
 
         self.register = function() {
             var url = '#/register';
-            router.navigateTo(url);
+            router.navigate(url);
         };
         
         var vm = {

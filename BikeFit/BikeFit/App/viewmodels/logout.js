@@ -24,7 +24,7 @@
                     }
                 }).done(function () {
                     router.activate('frames');
-                    return router.navigateTo('#/frames');
+                    return router.navigate('#/frames');
                 });
         }
         //#endregion

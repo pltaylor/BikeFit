@@ -62,7 +62,7 @@
         }
 
         function goToAdmin(item) {
-            router.navigateTo(item.hash);
+            router.navigate(item.hash);
         }
 
         function failedInitialization(error) {
