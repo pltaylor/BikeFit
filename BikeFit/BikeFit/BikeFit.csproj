@@ -234,6 +234,10 @@
     <Compile Include="Migrations\201305241404393_AddManufacturerIsActive.Designer.cs">
       <DependentUpon>201305241404393_AddManufacturerIsActive.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201403211245333_AddSortOrder.cs" />
+    <Compile Include="Migrations\201403211245333_AddSortOrder.Designer.cs">
+      <DependentUpon>201403211245333_AddSortOrder.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\BikeModel.cs" />
@@ -374,6 +378,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201305241404393_AddManufacturerIsActive.resx">
       <DependentUpon>201305241404393_AddManufacturerIsActive.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201403211245333_AddSortOrder.resx">
+      <DependentUpon>201403211245333_AddSortOrder.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

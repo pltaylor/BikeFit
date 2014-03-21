@@ -19,6 +19,8 @@ namespace BikeFit.Models
 
         public BikeModel BikeModel { get; set; }
 
+        public int SortOrder { get; set; }
+
         public string Size { get; set; }
 
         public WheelSize WheelSize { get; set; } //
