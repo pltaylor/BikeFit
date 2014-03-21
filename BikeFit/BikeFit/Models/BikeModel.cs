@@ -22,6 +22,12 @@ namespace BikeFit.Models
 
         public virtual Manufacturer Manufacturer { get; set; }
 
+
+        [ForeignKey("BikeType")]
+        public int BikeTypeId { get; set; }
+
+        public virtual BikeType BikeType { get; set; }
+
         public string Name { get; set; }
 
         [Column(TypeName = "Date")]

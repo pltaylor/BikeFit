@@ -7,6 +7,7 @@
         var manufacturer = ko.observable();
         var isSaving = ko.observable(false);
         var modelsWithSizes = ko.observableArray();
+        var bikeTypes = ko.observableArray();
 
         manufacturer.subscribe(function (newValue) {
             datacontext.getBikeModelsWithSizes(modelsWithSizes, newValue.manufacturerID());
@@ -81,6 +82,7 @@
 
         var vm = {
             activate: activate,
+            bikeTypes: bikeTypes,
             cancel: cancel,
             canCreateNewModel: canCreateNewModel,
             canDeactivate: canDeactivate,
@@ -101,7 +103,8 @@
             logger.log('Frames Admin View Activated', null, 'frames', false);
 
             return datacontext.getAllManufacturers(manufacturers).then(function() {
-                datacontext.getBikeModelsWithSizes(modelsWithSizes, manufacturers()[0].manufacturerID());
+                datacontext.getBikeModelsWithSizes(modelsWithSizes, manufacturers()[0].manufacturerID())
+                    .then(datacontext.getBikeTypes(bikeTypes));
             });
         }
 

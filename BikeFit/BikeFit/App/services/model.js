@@ -22,6 +22,8 @@
                 'BikeModel', null, bikeModelInitializer);
             metadataStore.registerEntityTypeCtor(
                 'BikeSize', null, bikeSizeInitializer);
+            metadataStore.registerEntityTypeCtor(
+                'BikeType', null, bikeTypeInitializer);
         }
 
         function createNullos(manager) {
@@ -42,6 +44,10 @@
         }
 
         function manufacturerInitializer(manufacturer) {
+            //Add computed observables here
+        }
+
+        function bikeTypeInitializer(bikeType) {
             //Add computed observables here
         }
 

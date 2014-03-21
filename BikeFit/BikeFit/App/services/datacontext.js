@@ -60,6 +60,22 @@
                     data, false);
             }
         };
+
+        var getBikeTypes = function(bikeTypeObservable) {
+            var query = entityQuery.from('BikeTypes');
+
+            return manager.executeQuery(query)
+                .then(querySucceeded)
+                .fail(queryFailed);
+
+            function querySucceeded(data) {
+                if (bikeTypeObservable) {
+                    bikeTypeObservable(data.results);
+                }
+                log('Retrieved [BikeTypes] from remote data source',
+                    data, false);
+            }
+        };
         
         var getBikeModels = function (bikeModelsObservable, manufacturerId) {
             if (manufacturerId == "00000000-0000-0000-0000-000000000000") {
@@ -187,6 +203,7 @@
             createNewModel: createNewModel,
             getAllManufacturers: getAllManufacturers,
             getManufacturers: getManufacturers,
+            getBikeTypes: getBikeTypes,
             getBikeModels: getBikeModels,
             getBikeModelsWithSizes: getBikeModelsWithSizes,
             getBikeSizes: getBikeSizes,

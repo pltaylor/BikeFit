@@ -29,6 +29,12 @@ namespace BikeFit.Controllers
         }
 
         [HttpGet]
+        public IQueryable<BikeType> BikeTypes()
+        {
+            return _ContextProvider.Context.BikeTypes;
+        }
+
+        [HttpGet]
         public IQueryable<BikeModel> BikeModels()
         {
             return _ContextProvider.Context.BikeModels;
