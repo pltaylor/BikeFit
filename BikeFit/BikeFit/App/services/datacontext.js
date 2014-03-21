@@ -120,7 +120,7 @@
         
         var getBikeSizes = function (bikeSizesObservable, modelId) {
             var query = entityQuery.from('BikeSizes').where('bikeModelID', '==', modelId)
-                .orderBy('size');
+                .orderBy('sortOrder').orderBy('size');
 
             return manager.executeQuery(query)
                 .then(querySucceeded)
