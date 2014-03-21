@@ -4,7 +4,7 @@ using System.Web.Http;
 using BikeFit.DataLayer;
 using BikeFit.Models;
 
-using Breeze.WebApi;
+using Breeze.WebApi2;
 using Breeze.ContextProvider.EF6;
 using Newtonsoft.Json.Linq;
 using SaveResult = Breeze.ContextProvider.SaveResult;
