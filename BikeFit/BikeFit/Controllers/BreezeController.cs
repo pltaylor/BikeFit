@@ -5,44 +5,45 @@ using BikeFit.DataLayer;
 using BikeFit.Models;
 
 using Breeze.WebApi;
-using Breeze.WebApi.EF;
+using Breeze.ContextProvider.EF6;
 using Newtonsoft.Json.Linq;
+using SaveResult = Breeze.ContextProvider.SaveResult;
 
 namespace BikeFit.Controllers
 {
     [BreezeController]
     public class BreezeController : ApiController
     {
-        readonly EFContextProvider<BikeFitContext> contextProvider = new EFContextProvider<BikeFitContext>();
+        readonly EFContextProvider<BikeFitContext> _ContextProvider = new EFContextProvider<BikeFitContext>();
 
         [HttpGet]
         public string Metadata()
         {
-            return contextProvider.Metadata();
+            return _ContextProvider.Metadata();
         }
 
         [HttpGet]
         public IQueryable<Manufacturer> Manufacturers()
         {
-            return contextProvider.Context.Manufacturers;
+            return _ContextProvider.Context.Manufacturers;
         }
 
         [HttpGet]
         public IQueryable<BikeModel> BikeModels()
         {
-            return contextProvider.Context.BikeModels;
+            return _ContextProvider.Context.BikeModels;
         }
 
         [HttpGet]
         public IQueryable<BikeSize> BikeSizes()
         {
-            return contextProvider.Context.BikeSizes;
+            return _ContextProvider.Context.BikeSizes;
         }
 
         [HttpPost]
         public SaveResult SaveChanges(JObject saveBundle)
         {
-            return contextProvider.SaveChanges(saveBundle);
+            return _ContextProvider.SaveChanges(saveBundle);
         }
 
     }
