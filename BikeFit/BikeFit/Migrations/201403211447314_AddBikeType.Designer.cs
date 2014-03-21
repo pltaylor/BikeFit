@@ -13,7 +13,7 @@ namespace BikeFit.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201403211336000_AddBikeType"; }
+            get { return "201403211447314_AddBikeType"; }
         }
         
         string IMigrationMetadata.Source

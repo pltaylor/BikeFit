@@ -16,16 +16,10 @@ namespace BikeFit.Migrations
                     })
                 .PrimaryKey(t => t.BikeTypeId);
             
-            AddColumn("dbo.BikeModels", "TypeID", c => c.Int(nullable: false));
-            CreateIndex("dbo.BikeModels", "TypeID");
-            AddForeignKey("dbo.BikeModels", "TypeID", "dbo.BikeTypes", "BikeTypeId", cascadeDelete: true);
         }
         
         public override void Down()
         {
-            DropForeignKey("dbo.BikeModels", "TypeID", "dbo.BikeTypes");
-            DropIndex("dbo.BikeModels", new[] { "TypeID" });
-            DropColumn("dbo.BikeModels", "TypeID");
             DropTable("dbo.BikeTypes");
         }
     }
