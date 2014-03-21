@@ -7,12 +7,12 @@ namespace BikeFit.Migrations
     {
         public override void Up()
         {
-            AddColumn("dbo.Manufacturers", "IsActive", c => c.Boolean(nullable: false, defaultValue: true));
+            //AddColumn("dbo.Manufacturers", "IsActive", c => c.Boolean(nullable: false, defaultValue: true));
         }
         
         public override void Down()
         {
-            DropColumn("dbo.Manufacturers", "IsActive");
+            //DropColumn("dbo.Manufacturers", "IsActive");
         }
     }
 }
