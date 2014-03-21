@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace BikeFitter.Models
+namespace BikeFit.Models
 {
     public class BikeType
     {
