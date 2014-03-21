@@ -6,8 +6,7 @@ namespace BikeFit.DataLayer
 {
     public class BikeFitContext : DbContext 
     {
-        public BikeFitContext()
-            : base("AzureConnection")
+        public BikeFitContext() : base("AzureConnection")
         {
         }
 
@@ -18,5 +17,7 @@ namespace BikeFit.DataLayer
         public DbSet<BikeSize> BikeSizes { get; set; }
 
         public DbSet<UserProfile> UserProfiles { get; set; }
+
+        public DbSet<BikeType> BikeTypes { get; set; }
     }
 }

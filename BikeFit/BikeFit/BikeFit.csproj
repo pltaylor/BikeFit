@@ -238,10 +238,15 @@
     <Compile Include="Migrations\201403211245333_AddSortOrder.Designer.cs">
       <DependentUpon>201403211245333_AddSortOrder.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201403211336000_AddBikeType.cs" />
+    <Compile Include="Migrations\201403211336000_AddBikeType.Designer.cs">
+      <DependentUpon>201403211336000_AddBikeType.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\BikeModel.cs" />
     <Compile Include="Models\BikeSize.cs" />
+    <Compile Include="Models\BikeType.cs" />
     <Compile Include="Models\Manufacturer.cs" />
     <Compile Include="Models\WheelSize.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -381,6 +386,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201403211245333_AddSortOrder.resx">
       <DependentUpon>201403211245333_AddSortOrder.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201403211336000_AddBikeType.resx">
+      <DependentUpon>201403211336000_AddBikeType.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
