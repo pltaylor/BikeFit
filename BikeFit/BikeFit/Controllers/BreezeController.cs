@@ -5,7 +5,7 @@ using BikeFit.DataLayer;
 using BikeFit.Models;
 
 using Breeze.WebApi;
-
+using Breeze.WebApi.EF;
 using Newtonsoft.Json.Linq;
 
 namespace BikeFit.Controllers
